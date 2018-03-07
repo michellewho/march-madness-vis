@@ -1,0 +1,51 @@
+{
+  "name": "National Champion",
+  "left": [
+    {
+      "name": "Midwest",
+      "left": [
+        {
+          "name": "Midwest Left 3"
+        },
+        {
+          "name": "Midwest Left 4"
+        }
+      ]
+    },
+    {
+      "name": "West",
+      "left": [
+        {
+          "name": "West Left 3"
+        },
+        {
+          "name": "West Left 4"
+        }
+      ]
+    }
+  ],
+  "right": [
+    {
+      "name": "South",
+      "right": [
+        {
+          "name": "South Right 3"
+        },
+        {
+          "name": "South Right 4"
+        }
+      ]
+    },
+    {
+      "name": "East",
+      "right": [
+        {
+          "name": "East Right 5"
+        },
+        {
+          "name": "East Right 6"
+        }
+      ]
+    }
+  ]
+}

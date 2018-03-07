@@ -11,11 +11,16 @@ Every year, college basketball teams compete to be one of the 64 teams that are 
 NCAA basketball tournament, millions of fans flock to colleges around the nation to watch their favorite teams compete for the coveted title of National Champions. With such 
 competition and chance as the tournament provides, gambling has become a large aspect of the tournament for fans. Every year, millions of fans place bets across all aspects of the 
 tournament, the largest being the overall winner of the tournament. In order to get there, fans have developed a bracket gambling system. For each game in the tournament, fans can 
-select which team they believe will win until they select a National Champion. With so many games, the payout is large and very hard to achieve with accuracy. But exactly how hard 
-is it to correctly pick every winner in the tournament? It is so hard that it has never been done. There has never been a perfect bracket.
+select which team they believe will win until they select a National Champion. 
+
+With so many games, the payout is large and very hard to achieve with accuracy. But exactly how hard is it to correctly pick every winner in the tournament? It is so hard that it 
+has never been done. There has never been a perfect bracket.
 [/waypoint]
 
 [waypoint]
+[aside]
+
+[/aside]
 ## General Terminology
 The March Madness NCAA Tournament consists of two tournaments, one for men and one for women. There are a total of 68 mens teams and 64 womens teams in their respective tournaments. 
 For each tournament, the first 32 teams are selected based on their season records and divisional tournaments. The rest of the teams are selected by a commitee based off season 
@@ -57,17 +62,19 @@ If we have 4 teams, with 3 games being played, assuming teams are equal in skill
 
 [waypoint]
 [aside]
+[data name:"bracket" source:"bracket.json" /]
+[TeamHistory data:someArrayOfData /]
 [/aside]
 
 ## Where do these numbers come from?
 The probabilities above assume that all teams in the tournament are equal and thus have an equal probability of winning a match. That is, with this reasoning, we assume that Duke University
 and Washington State University are equal matches (when they are very much not). For the purpose of understanding probability, we will hold this assumption.
 
-To find the probability of s
-
+We can use the equation to understand this further:
 [Equation]
   f(n) = (1/2)^n
 [/Equation]
+The probability of getting a perfect bracket is dependent on n, the number of teams there are in the bracket. 
 
 [/waypoint]
 
@@ -126,5 +133,3 @@ Select Team Seed:
 1 [Range value:seedSelect min:1 max:16 /] 16
 
 [/waypoint]
-
-
