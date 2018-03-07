@@ -1,0 +1,126 @@
+[meta title:"March Madness Viz" description:"An explanatory exploration of March Madness and what your chances are of creating a perfect backet for the NCAA Tournament." /]
+
+[Header
+  title:"Understanding March Madness"
+  subtitle:"A visual exploration of what your chances are of creating a perfect March Madness backet for the NCAA Tournament."
+  author:"Michelle Ho, Jon Alkan, and Austin Hutchinson" /]
+
+[waypoint]
+## Overview of March Madness
+Every year, college basketball teams compete to be one of the 64 teams that are invited to play for the NCAA National Championship
+in the March Madness tournament. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+ ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
+ reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt 
+ in culpa qui officia deserunt mollit anim id est laborum.
+[/waypoint]
+
+[waypoint]
+## General Terminology
+There are a total of 68 men’s teams and 64 women’s teams in the NCAA tournament. On Selection Sunday 32 teams gain automatic entry into the tournament due to winning their 
+conference’s championships. The remaining teams rely on a selection committee to be granted entry into the tournament. This process takes place on the Sunday before the 
+March Madness Tournament begins and, therefore, is appropriately named Selection Sunday. Selection Sunday is also the day when the brackets and seeds are released to the public.
+
+
+Brackets are the format in which the tournament runs. For example, on the day of the **“First Four”** there will be four brackets and eight teams playing; the four losing teams then 
+will be removed from the tournament and the four winning teams will move to their new brackets and prepare for the **“Round of 64.”**
+[/waypoint]
+
+[waypoint]
+## Bracket Madness
+Every year 68 teams enter the March Madness Bracket...Your odds of getting a perfect bracket? Try **1 in 9,223,372,036,854,775,808 or 1 in 9.2 quintillion.** (This excludes the first 
+four games as a 16 seed has never beaten a 1 seed.) To put this into perspective, you have a better chance of:
+* Winning an Academy Award (1 in ~11,500)
+* Getting Struck by Lightning (1 in ~700,000)
+* Becoming President (1 in ~10,000,000)
+* Winning the Lottery (1 in ~175,223,510)
+[/waypoint]
+
+[waypoint]
+[aside]
+[CustomD3Component state:selectVal /]
+[var name:"selectVal" value:"2" /]
+Number of Teams: [Select value:selectVal options:`["2", "4"]`  /]
+[/aside]
+
+## Where does 1 in 9.2 quintillion come from?
+To understand where these odds come from, it's important to understand probability. [link text:"Probability" href:"https://en.wikipedia.org/wiki/Probability" /] is the extent
+to which something is probable, or in simpler terms, the likelihood of something happening or being the case.
+
+Let's start small scale.
+Let's assume we have 2 teams, and 1 game being played. If there are two teams, assuming teams are equal in skill and all other things held constant, each team will have a 50% chance 
+or 1/2 probability of winning the match.
+
+If we have 4 teams, with 3 games being played, assuming teams are equal in skill and all other things held constant, each team will have a 1/8 probability of winning.
+[/waypoint]
+
+[waypoint]
+## Where do these numbers come from?
+The probabilities above assume that all teams in the tournament are equal and thus have an equal probability of winning a match. That is, with this reasoning, we assume that Duke University
+and Washington State University are equal matches (when they are very much not). For the purpose of understanding probability, we will hold this assumption.
+
+To understand where these numbers come from, let's break this down. The probability that someone will create a perfect bracket is dependent on the number of teams within the bracket. If there
+are four teams, A, B, C, and D within the tournament, we can 
+
+[Equation]
+  f(n) = (1/2)^n
+[/Equation]
+
+[/waypoint]
+
+
+// [waypoint]
+
+// ## What are the odds based off ranking?
+// [aside]
+// [var name:"seedSelect" value:1 /]
+
+// Selected Team Seed: [Display value:seedSelect /]
+// [IdyllVegaLite data:`simpleodds.slice(seedSelect-1, seedSelect)` spec:`{
+//      width: 500,
+//      height: 100,
+//        "layer": [{
+//             "mark": "bar",
+//             "encoding": {
+//                 x: {
+//                       field: "p_win",
+//                       type: "quantitative",
+//                       axis: {title: "Chance of Winning (Percent)"},
+//                       stack: "normalize",
+//                       scale: { domain: [0, 100] }
+//                 },
+//            }
+//         }, {
+//            "mark": {
+//             "type": "text",
+//             "align": "left",
+//             "baseline": "middle",
+//             "dx": 3
+//         },
+//         "encoding": {
+//             x: {
+//                    field: "p_win",
+//                    type: "quantitative",
+//                    axis: {title: "Chance of Winning (Percent)"},
+//                    stack: "normalize",
+//                    scale: { domain: [0, 100] }
+//             },
+//             "text": {"field": "p_win", "type": "quantitative"},
+//           }
+//         }]
+// }` /]
+// [/aside]
+// We can make this more realistic. If we neglect the assumption that all teams are equal, we can start to understand how teams will actually fare in the tournament to make a better prediction
+// of who will win.
+
+// In the tournament, each team is given a ranking that depends on their play throughout the year leading up to the tournament. Within each of the four divions, teams are ranked 1 through 16 and
+//  from these numbers their first games are decided. The games are decided so that, initially, the #1 ranked (seeded) team plays the #16 seed team, the #2 seed plays #15, #3 seed plays #14 seed,
+//   and so on. Historically, these teams have a set percentage of winning the first round based off these ranks. The visualization to the right shows the likelihood of each team winning their 
+//   first game based off their rank.
+
+// Select Team Seed: 
+// 1 [Range value:seedSelect min:1 max:16 /] 16
+
+
+// [/waypoint]
+
+
