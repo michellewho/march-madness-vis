@@ -12,7 +12,8 @@ class TeamHistory extends D3Component {
     svg.attr('viewBox', `0 0 ${size} ${size}`)
       .style('width', '100%')
       .style('height', 'auto');
-
+    
+    console.log(props);
     
 
   }

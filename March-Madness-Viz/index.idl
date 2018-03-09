@@ -6,6 +6,9 @@
   author:"Michelle Ho, Jon Alkan, and Austin Hutchinson" /]
 
 [waypoint]
+[aside]
+
+[/aside]
 ## Overview of March Madness
 Every year, college basketball teams compete to be one of the 64 teams that are invited to play for the NCAA National Championship in the March Madness tournament. As the largest 
 NCAA basketball tournament, millions of fans flock to colleges around the nation to watch their favorite teams compete for the coveted title of National Champions. With such 
@@ -18,9 +21,7 @@ has never been done. There has never been a perfect bracket.
 [/waypoint]
 
 [waypoint]
-[aside]
 
-[/aside]
 ## General Terminology
 The March Madness NCAA Tournament consists of two tournaments, one for men and one for women. There are a total of 68 mens teams and 64 womens teams in their respective tournaments. 
 For each tournament, the first 32 teams are selected based on their season records and divisional tournaments. The rest of the teams are selected by a commitee based off season 
@@ -31,6 +32,20 @@ The bracket is divided into 4 main sections denoting their geographical areas. T
 seed in each division. After this, the 64 remaining teams play in "The Round of 64". After this, the winning teams play in "The Round of 32". The winning teams then proceed to "The 
 Sweet Sixteen", then "The Elite 8", next "The Final Four", and finally "The National Championship" game.
 [/waypoint]
+
+[aside]
+[data name:"elite" source:"elite8.csv" /]
+
+[TeamHistory data:elite /]
+
+
+[/aside]
+
+## Jon's Section to Fill In
+Jon's section to fill in
+[var name:"radioVal" value:"Sweet16" /]
+[Radio value:radioVal options:`["Sweet16", "Elite8", "Final4", "NatApp", "NatWins"]`  /]
+
 
 [waypoint]
 ## Bracket Madness
@@ -62,8 +77,8 @@ If we have 4 teams, with 3 games being played, assuming teams are equal in skill
 
 [waypoint]
 [aside]
-[data name:"bracket" source:"bracket.json" /]
-[TeamHistory data:someArrayOfData /]
+// [data name:"bracket" source:"bracket.json" /]
+// [TeamHistory data:bracket /]
 [/aside]
 
 ## Where do these numbers come from?
@@ -120,6 +135,7 @@ Selected Team Seed: [Display value:seedSelect /]
           }
         }]
 }` /]
+
 [/aside]
 We can make this more realistic. If we neglect the assumption that all teams are equal, we can start to understand how teams will actually fare in the tournament to make a better prediction
 of who will win.
