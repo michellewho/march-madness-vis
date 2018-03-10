@@ -32,87 +32,156 @@ var Brackets = function (_D3Component) {
   _createClass(Brackets, [{
     key: 'initialize',
     value: function initialize(node, props) {
-      root = props.data;
+      var treeData = {
+        "name": "Champion",
+        "winners": [{
+          "name": "Winner Left 1",
+          "winners": [{ "name": "Winner Left 3" }, { "name": "Winner Left 4" }]
+        }, { "name": "Winner Left 2" }],
+        "challengers": [{
+          "name": "Final 4 South",
+          "challengers": [{
+            "name": "Elite 8 South",
+            "challengers": [{
+              "name": "Sweet 16 South",
+              "challengers": [{
+                "name": "Round 2 South",
+                "challengers": [{ "name": "Round 1 (1)" }, { "name": "Round 1 (16)" }]
+              }, {
+                "name": "Round 2 South",
+                "challengers": [{ "name": "Round 1 (2)" }, { "name": "Round 1 (15)" }]
+              }]
+            }, {
+              "name": "Sweet 16 South",
+              "challengers": [{
+                "name": "Round 2 South",
+                "challengers": [{ "name": "Round 1 (3)" }, { "name": "Round 1 (14)" }]
+              }, {
+                "name": "Round 2 South",
+                "challengers": [{ "name": "Round 1 (4)" }, { "name": "Round 1 (13)" }]
+              }]
+            }]
+          }, {
+            "name": "Elite 8 South",
+            "challengers": [{
+              "name": "Sweet 16 South",
+              "challengers": [{
+                "name": "Round 2 South",
+                "challengers": [{ "name": "Round 1 (5)" }, { "name": "Round 1 (12)" }]
+              }, {
+                "name": "Round 2 South",
+                "challengers": [{ "name": "Round 1 (6)" }, { "name": "Round 1 (11)" }]
+              }]
+            }, {
+              "name": "Sweet 16 South",
+              "challengers": [{
+                "name": "Round 2 South ",
+                "challengers": [{ "name": "Round 1 (7)" }, { "name": "Round 1 (10)" }]
+              }, {
+                "name": "Round 2 South",
+                "challengers": [{ "name": "Round 1 (8)" }, { "name": "Round 1 (9)" }]
+              }]
+            }]
+          }]
+        }, {
+          "name": "Final 4 East",
+          "challengers": [{
+            "name": "Elite 8 East",
+            "challengers": [{
+              "name": "Sweet 16 East",
+              "challengers": [{
+                "name": "Round 2 East",
+                "challengers": [{ "name": "Round 1 (1)" }, { "name": "Round 1 (16)" }]
+              }, {
+                "name": "Round 2 East",
+                "challengers": [{ "name": "Round 1 (2)" }, { "name": "Round 1 (15)" }]
+              }]
+            }, {
+              "name": "Sweet 16 East",
+              "challengers": [{
+                "name": "Round 2 East",
+                "challengers": [{ "name": "Round 1 (3)" }, { "name": "Round 1 (14)" }]
+              }, {
+                "name": "Round 2 East",
+                "challengers": [{ "name": "Round 1 (4)" }, { "name": "Round 1 (13)" }]
+              }]
+            }]
+          }, {
+            "name": "Elite 8 East",
+            "challengers": [{
+              "name": "Sweet 16 East",
+              "challengers": [{
+                "name": "Round 2 East",
+                "challengers": [{ "name": "Round 1 (5)" }, { "name": "Round 1 (12)" }]
+              }, {
+                "name": "Round 2 East",
+                "challengers": [{ "name": "Round 1 (6)" }, { "name": "Round 1 (11)" }]
+              }]
+            }, {
+              "name": "Sweet 16 East",
+              "challengers": [{
+                "name": "Round 2 East",
+                "challengers": [{ "name": "Round 1 (7)" }, { "name": "Round 1 (10)" }]
+              }, {
+                "name": "Round 2 East",
+                "challengers": [{ "name": "Round 1 (8)" }, { "name": "Round 1 (9)" }]
+              }]
+            }]
+          }]
+        }]
 
-      // const svg = this.svg = d3.select(node).append('svg');
-      // svg.attr('viewBox', `0 0 ${size} ${size}`)
-      //   .style('width', '100%')
-      //   .style('height', 'auto');
+        // set the dimensions and margins of the diagram
+      };var margin = { top: 20, right: 100, bottom: 30, left: 100 },
+          width = 660 - margin.left - margin.right,
+          height = 500 - margin.top - margin.bottom;
 
-      var margin = { top: 30, right: 10, bottom: 10, left: 10 },
-          width = 960 - margin.left - margin.right,
-          halfWidth = width / 2,
-          height = 500 - margin.top - margin.bottom,
-          i = 0,
-          duration = 500,
-          root;
+      // declares a tree layout and assigns the size
+      var treemapr = d3.tree().size([height, width]);
 
-      var getChildren = function getChildren(d) {
-        var a = [];
-        if (d.winners) for (var i = 0; i < d.winners.length; i++) {
-          d.winners[i].isRight = false;
-          d.winners[i].parent = d;
-          a.push(d.winners[i]);
-        }
-        if (d.challengers) for (var i = 0; i < d.challengers.length; i++) {
-          d.challengers[i].isRight = true;
-          d.challengers[i].parent = d;
-          a.push(d.challengers[i]);
-        }
-        return a.length ? a : null;
-      };
+      var treemapl = d3.tree().size([height, width]);
 
-      var tree = d3.tree().size([height, width]);
-
-      var diagonal = function link(d) {
-        return "M" + d.source.y + "," + d.source.x + "C" + (d.source.y + d.target.y) / 2 + "," + d.source.x + " " + (d.source.y + d.target.y) / 2 + "," + d.target.x + " " + d.target.y + "," + d.target.x;
-      };
-
-      var elbow = function elbow(d, i) {
-        var source = calcLeft(d.source);
-        var target = calcLeft(d.target);
-        var hy = (target.y - source.y) / 2;
-        if (d.isRight) hy = -hy;
-        return "M" + source.y + "," + source.x + "H" + (source.y + hy) + "V" + target.x + "H" + target.y;
-      };
-      var connector = elbow;
-
-      var calcLeft = function calcLeft(d) {
-        var l = d.y;
-        if (!d.isRight) {
-          l = d.y - halfWidth;
-          l = halfWidth - l;
-        }
-        return { x: d.x, y: l };
-      };
-
-      var svg = this.svg = d3.select(node).append('svg');
-      svg.attr('viewBox', '0 0 ' + size + ' ' + size).style('width', '100%').style('height', '100%');
-
-      //   var t1 = d3.layout.tree().size([height, halfWidth]).children(function (d) { return d.winners; }),
-      //     t2 = d3.layout.tree().size([height, halfWidth]).children(function (d) { return d.challengers; });
-      //   t1.nodes(root);
-      //   t2.nodes(root);
-
-      //   var rebuildChildren = function (node) {
-      //     node.children = getChildren(node);
-      //     if (node.children) node.children.forEach(rebuildChildren);
-      //   }
-      //   rebuildChildren(root);
-      //   root.isRight = false;
-      //   update(root);
-      // });
-
-      root.x0 = height / 2;
-      root.y0 = width / 2;
-      var t1 = d3.tree().size([height, halfWidth]).children(function (d) {
-        return d.winners;
-      }),
-          t2 = d3.tree().size([height, halfWidth]).children(function (d) {
+      //  assigns the data to a hierarchy using parent-child relationships
+      var nodesr = d3.hierarchy(treeData, function (d) {
         return d.challengers;
       });
 
-      console.log(t1);
+      var nodesl = d3.hierarchy(treeData, function (d) {
+        return d.winners;
+      });
+
+      // maps the node data to the tree layout
+      nodesr = treemapr(nodesr);
+      nodesl = treemapl(nodesl);
+
+      // append the svg object to the body of the page
+      // appends a 'group' element to 'svg'
+      // moves the 'group' element to the top left margin
+      var svg = d3.select(node).append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom),
+          g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+      // adds the links between the nodes
+      var link = g.selectAll(".link").data(nodesr.descendants().slice(1)).enter().append("path").attr("class", "link").attr("d", function (d) {
+        return "M" + d.y + "," + d.x + "C" + (d.y + d.parent.y) / 2 + "," + d.x + " " + (d.y + d.parent.y) / 2 + "," + d.parent.x + " " + d.parent.y + "," + d.parent.x;
+      }).style("fill", "none").style("stroke", "#ccc").style("stroke-width", "1.5px");
+
+      // adds each node as a group
+      var node = g.selectAll(".node").data(nodesr.descendants()).enter().append("g").attr("class", function (d) {
+        return "node" + (d.children ? " node--internal" : " node--leaf");
+      }).attr("transform", function (d) {
+        return "translate(" + d.y + "," + d.x + ")";
+      });
+
+      // adds the circle to the node
+      node.append("circle").attr("r", 5).style("cursor", "pointer").style("fill", "#fff").style("stroke", "steelblue").style("stroke-width", "1.5px");
+
+      // adds the text to the node
+      node.append("text").attr("dy", ".35em").attr("x", function (d) {
+        return d.children ? -13 : 13;
+      }).style("text-anchor", function (d) {
+        return d.children ? "end" : "start";
+      }).style("font-size", "10px").text(function (d) {
+        return d.data.name;
+      });
     }
   }, {
     key: 'update',
@@ -262,7 +331,7 @@ var TeamHistory = function (_D3Component) {
     key: 'initialize',
     value: function initialize(node, props) {
       var container = d3.select(node).append('svg');
-      container.attr('viewBox', '0 0 ' + size * 2 + ' ' + size * 5).style('width', '140%').style('height', '100%');
+      container.attr('viewBox', '-40 0 ' + size * 2 + ' ' + size * 5).style('width', '180%').style('height', '110%');
 
       d3.select(node).attr("class", "visContainer");
 
@@ -296,7 +365,7 @@ var TeamHistory = function (_D3Component) {
   }, {
     key: 'update',
     value: function update(props) {
-      console.log(props.natApps);
+      // console.log(props.natApps)
       function drawVis(datasetVis, height) {
         // console.log(datasetVis)
         x.domain([0, d3.max(datasetVis, function (d) {
@@ -307,7 +376,7 @@ var TeamHistory = function (_D3Component) {
         }));
 
         var container = d3.select('div.visContainer').append('svg');
-        container.attr('viewBox', '0 0 ' + size * 2 + ' ' + size * 5).style('width', '140%').style('height', '100%');
+        container.attr('viewBox', '-40 0 ' + size * 2 + ' ' + size * 5).style('width', '180%').style('height', '110%');
 
         container.append("g").attr('transform', 'translate(' + [150] + ')').style("font-size", "15px").call(d3.axisLeft(y));
 
@@ -116345,7 +116414,7 @@ ReactDOM[mountMethod](React.createElement(IdyllDocument, { ast: ast, components:
 },{"__IDYLL_AST__":"__IDYLL_AST__","__IDYLL_COMPONENTS__":"__IDYLL_COMPONENTS__","__IDYLL_DATA__":"__IDYLL_DATA__","__IDYLL_OPTS__":"__IDYLL_OPTS__","__IDYLL_SYNTAX_HIGHLIGHT__":"__IDYLL_SYNTAX_HIGHLIGHT__","idyll-document":"/usr/local/lib/node_modules/idyll/node_modules/idyll-document/dist/cjs/index.js","react":"/usr/local/lib/node_modules/idyll/node_modules/react/index.js","react-dom":"/usr/local/lib/node_modules/idyll/node_modules/react-dom/index.js"}],"__IDYLL_AST__":[function(require,module,exports){
 "use strict";
 
-module.exports = [["Header", [["title", ["value", "Understanding March Madness"]], ["subtitle", ["value", "A visual exploration of what your chances are of creating a perfect March Madness backet for the NCAA Tournament."]], ["author", ["value", "Michelle Ho, Jon Alkan, and Austin Hutchinson"]]], []], ["waypoint", [], [["aside", [], [["data", [["name", ["value", "brackets"]], ["source", ["value", "brackets.json"]]], []], ["Brackets", [["data", ["variable", "brackets"]]], []]]], ["h2", [], ["Overview of March Madness"]], ["p", [], ["Every year, college basketball teams compete to be one of the 64 teams that are invited to play for the NCAA National Championship in the March Madness tournament. As the largest \nNCAA basketball tournament, millions of fans flock to colleges around the nation to watch their favorite teams compete for the coveted title of National Champions. With such \ncompetition and chance as the tournament provides, gambling has become a large aspect of the tournament for fans. Every year, millions of fans place bets across all aspects of the \ntournament, the largest being the overall winner of the tournament. In order to get there, fans have developed a bracket gambling system. For each game in the tournament, fans can \nselect which team they believe will win until they select a National Champion. "]], ["p", [], ["With so many games, the payout is large and very hard to achieve with accuracy. But exactly how hard is it to correctly pick every winner in the tournament? It is so hard that it \nhas never been done. There has never been a perfect bracket."]]]], ["waypoint", [], [["h2", [], ["General Terminology"]], ["p", [], ["The March Madness NCAA Tournament consists of two tournaments, one for men and one for women. There are a total of 68 mens teams and 64 womens teams in their respective tournaments. \nFor each tournament, the first 32 teams are selected based on their season records and divisional tournaments. The rest of the teams are selected by a commitee based off season \nperformance, difficulty of schedule, and prior tournament outcomes. This selection commitee meets on the Sunday before the tournament begins, called Selection Sunday. The commitee \nalso assigns each team a ranking (seed) and lays out the brackets for the tournament. "]], ["p", [], ["The bracket is divided into 4 main sections denoting their geographical areas. The men’s tournament starts with the two lowest seeded teams in each division playing to take the last \nseed in each division. After this, the 64 remaining teams play in “The Round of 64”. After this, the winning teams play in “The Round of 32″. The winning teams then proceed to “The \nSweet Sixteen”, then “The Elite 8″, next “The Final Four”, and finally “The National Championship” game."]]]], ["waypoint", [], [["h2", [], ["Bracket Madness"]], ["p", [], ["Every year 68 teams enter the March Madness Bracket...Your odds of getting a perfect bracket? Try ", ["strong", [], ["1 in 9,223,372,036,854,775,808 or 1 in 9.2 quintillion."]], " (This excludes the first \nfour games as a 16 seed has never beaten a 1 seed.) To put this into perspective, you have a better chance of:"]], ["ul", [], [["li", [], ["Winning an Academy Award (", "1", " in ~", "1", "1", ",", "5", "0", "0", ")"]], ["li", [], ["Getting Struck by Lightning (", "1", " in ~", "7", "0", "0", ",", "0", "0", "0", ")"]], ["li", [], ["Becoming President (", "1", " in ~", "1", "0", ",", "0", "0", "0", ",", "0", "0", "0", ")"]], ["li", [], ["Winning the Lottery (", "1", " in ~", "1", "7", "5", ",", "2", "2", "3", ",", "5", "1", "0", ")"]]]]]], ["waypoint", [], [["aside", [], [["p", [], [["CustomD3Component", [["state", ["variable", "selectVal"]]], []], ["var", [["name", ["value", "selectVal"]], ["value", ["value", "2"]]], []], "\nNumber of Teams: ", ["Select", [["value", ["variable", "selectVal"]], ["options", ["expression", "[\"2\", \"4\"]"]]], []]]]]], ["h2", [], ["Where does ", "1", " in ", "9", ".", "2", " quintillion come from?"]], ["p", [], ["To understand where these odds come from, it’s important to understand probability. ", ["link", [["text", ["value", "Probability"]], ["href", ["value", "https://en.wikipedia.org/wiki/Probability"]]], []], " is the extent\nto which something is probable, or in simpler terms, the likelihood of something happening or being the case."]], ["p", [], ["Let’s start small scale.\nLet’s assume we have 2 teams, and 1 game being played. If there are two teams, assuming teams are equal in skill and all other things held constant, each team will have a 50% chance \nor 1/2 probability of winning the match."]], ["p", [], ["If we have 4 teams, with 3 games being played, assuming teams are equal in skill and all other things held constant, each team will have a 1/8 probability of winning."]]]], ["waypoint", [], [["aside", [], []], ["h2", [], ["Where do these numbers come from?"]], ["p", [], ["The probabilities above assume that all teams in the tournament are equal and thus have an equal probability of winning a match. That is, with this reasoning, we assume that Duke University\nand Washington State University are equal matches (when they are very much not). For the purpose of understanding probability, we will hold this assumption."]], ["p", [], ["We can use the equation to understand this further:", ["Equation", [], ["\n  f(n) = (1/2)^n"]], "\nThe probability of getting a perfect bracket is dependent on n, the number of teams there are in the bracket. "]]]], ["waypoint", [], [["h2", [], ["What are the odds based off ranking?"]], ["p", [], [["aside", [], [["data", [["name", ["value", "simpleodds"]], ["source", ["value", "simpleOddsJSON.json"]]], []], ["var", [["name", ["value", "seedSelect"]], ["value", ["value", 1]]], []], ["p", [], ["Selected Team Seed: ", ["Display", [["value", ["variable", "seedSelect"]]], []], ["IdyllVegaLite", [["data", ["expression", "simpleodds.slice(seedSelect-1, seedSelect)"]], ["spec", ["expression", "{\n     width: 500,\n     height: 100,\n       \"layer\": [{\n            \"mark\": \"bar\",\n            \"encoding\": {\n                x: {\n                      field: \"p_win\",\n                      type: \"quantitative\",\n                      axis: {title: \"Chance of Winning (Percent)\"},\n                      stack: \"normalize\",\n                      scale: { domain: [0, 100] }\n                },\n           }\n        }, {\n           \"mark\": {\n            \"type\": \"text\",\n            \"align\": \"left\",\n            \"baseline\": \"middle\",\n            \"dx\": 3\n        },\n        \"encoding\": {\n            x: {\n                   field: \"p_win\",\n                   type: \"quantitative\",\n                   axis: {title: \"Chance of Winning (Percent)\"},\n                   stack: \"normalize\",\n                   scale: { domain: [0, 100] }\n            },\n            \"text\": {\"field\": \"p_win\", \"type\": \"quantitative\"},\n          }\n        }]\n}"]]], []]]]]], "\nWe can make this more realistic. If we neglect the assumption that all teams are equal, we can start to understand how teams will actually fare in the tournament to make a better prediction \nof who will win."]], ["p", [], ["In the tournament, each team is given a ranking that depends on their play throughout the year leading up to the tournament. Within each of the four divisions, teams are ranked 1 through 16 \nand from these numbers their first games are decided. The games are decided so that, initially, the #1 ranked (seeded) team plays the #16 seed team, the #2 seed plays #15, #3 seed plays #14 \nseed, and so on. Historically, these teams have a set percentage of winning the first round based off these ranks. The visualization to the right shows the likelihood of each team winning \ntheir first game based off their rank."]], ["p", [], ["Select Team Seed: 1", ["Range", [["value", ["variable", "seedSelect"]], ["min", ["value", 1]], ["max", ["value", 16]]], []], "16"]]]], ["waypoint", [], [["h2", [], ["Jon’s Section to Fill In"]], ["p", [], ["As we begin to further understand how data can help narrow the odds of getting a perfect bracket, understanding how teams have performed in the past is a big indicator of how they might \nperform in the future."]], ["p", [], ["The NCAA started recording where teams got in the tournament dating back to 1985. The visualization to the right highlights the teams that have made it to each major point in the tournament. \nThe Sweet 16 is comprised of the 16 teams remaining in the tournament, 4 from each division, the Elite 8 is comprised of 8 and so on. As the visualization shows, only 17 different teams have won\n the tournament and knowing this gives us a better probability of knowing which teams will win the tournament. Furthermore, being able to spot trends can greatly increase the odds if a better \n bracket, for example if a team generally makes it to the Sweet 16 but then crumbles under the pressure you can comfortably guess how far they might make it again this year."]], ["data", [["name", ["value", "final"]], ["source", ["value", "final4.json"]]], []], ["data", [["name", ["value", "elite"]], ["source", ["value", "elite8.json"]]], []], ["data", [["name", ["value", "sweet"]], ["source", ["value", "sweet16.json"]]], []], ["data", [["name", ["value", "natWins"]], ["source", ["value", "natWins.json"]]], []], ["data", [["name", ["value", "natApps"]], ["source", ["value", "natApp.json"]]], []], ["var", [["name", ["value", "radioVal"]], ["value", ["value", "final"]]], []], ["Radio", [["value", ["variable", "radioVal"]], ["options", ["expression", "[{ value:\"final\", label: \"Final 4     \" }, { value:\"elite\", label: \"Elite 8     \" }, { value: \"sweet\", label: \"Sweet 16     \" }, { value: \"natWins\", label: \"National Wins     \" }, { value: \"natApps\", label: \"National Appearances\" }]"]]], []], ["TeamHistory", [["state", ["variable", "radioVal"]], ["final", ["variable", "final"]], ["elite", ["variable", "elite"]], ["sweet", ["variable", "sweet"]], ["natWins", ["variable", "natWins"]], ["natApps", ["variable", "natApps"]]], []]]]];
+module.exports = [["Header", [["title", ["value", "Understanding March Madness"]], ["subtitle", ["value", "A visual exploration of what your chances are of creating a perfect March Madness backet for the NCAA Tournament."]], ["author", ["value", "Michelle Ho, Jon Alkan, and Austin Hutchinson"]]], []], ["waypoint", [], [["h2", [], ["Overview of March Madness"]], ["p", [], ["Every year, college basketball teams compete to be one of the 64 teams that are invited to play for the NCAA National Championship in the March Madness tournament. As the largest \nNCAA basketball tournament, millions of fans flock to colleges around the nation to watch their favorite teams compete for the coveted title of National Champions. With such \ncompetition and chance as the tournament provides, gambling has become a large aspect of the tournament for fans. Every year, millions of fans place bets across all aspects of the \ntournament, the largest being the overall winner of the tournament. In order to get there, fans have developed a bracket gambling system. For each game in the tournament, fans can \nselect which team they believe will win until they select a National Champion. "]], ["p", [], ["With so many games, the payout is large and very hard to achieve with accuracy. But exactly how hard is it to correctly pick every winner in the tournament? It is so hard that it \nhas never been done. There has never been a perfect bracket."]]]], ["waypoint", [], [["aside", [], [["data", [["name", ["value", "brackets"]], ["source", ["value", "brackets.json"]]], []], ["Brackets", [["data", ["variable", "brackets"]]], []]]], ["h2", [], ["General Terminology"]], ["p", [], ["The March Madness NCAA Tournament consists of two tournaments, one for men and one for women. There are a total of 68 mens teams and 64 womens teams in their respective tournaments. \nFor each tournament, the first 32 teams are selected based on their season records and divisional tournaments. The rest of the teams are selected by a commitee based off season \nperformance, difficulty of schedule, and prior tournament outcomes. This selection commitee meets on the Sunday before the tournament begins, called Selection Sunday. The commitee \nalso assigns each team a ranking (seed) and lays out the brackets for the tournament. "]], ["p", [], ["The bracket is divided into 4 main sections denoting their geographical areas. The men’s tournament starts with the two lowest seeded teams in each division playing to take the last \nseed in each division. After this, the 64 remaining teams play in ", ["strong", [], ["“The Round of 64”"]], ". After this, the winning teams play in ", ["strong", [], ["“The Round of 32”"]], ". The winning teams then proceed to ", ["strong", [], ["“The Sweet Sixteen”"]], ", \nthen ", ["strong", [], ["“The Elite 8”"]], ", next ", ["strong", [], ["“The Final Four”"]], ", and finally ", ["strong", [], ["“The National Championship”"]], " game."]], ["p", [], ["In the visualization to the right, we begin to see the structure of the bracket for 2 of the divisions (here we show the South and the East). "]]]], ["waypoint", [], [["h2", [], ["Bracket Madness"]], ["p", [], ["Every year 68 teams enter the March Madness Bracket...Your odds of getting a perfect bracket? Try ", ["strong", [], ["1 in 9,223,372,036,854,775,808 or 1 in 9.2 quintillion."]], " (This excludes the first \nfour games as a 16 seed has never beaten a 1 seed.) To put this into perspective, you have a better chance of:"]], ["ul", [], [["li", [], ["Winning an Academy Award (", "1", " in ~", "1", "1", ",", "5", "0", "0", ")"]], ["li", [], ["Getting Struck by Lightning (", "1", " in ~", "7", "0", "0", ",", "0", "0", "0", ")"]], ["li", [], ["Becoming President (", "1", " in ~", "1", "0", ",", "0", "0", "0", ",", "0", "0", "0", ")"]], ["li", [], ["Winning the Lottery (", "1", " in ~", "1", "7", "5", ",", "2", "2", "3", ",", "5", "1", "0", ")"]]]]]], ["waypoint", [], [["aside", [], [["p", [], [["CustomD3Component", [["state", ["variable", "selectVal"]]], []], ["var", [["name", ["value", "selectVal"]], ["value", ["value", "2"]]], []], "\nNumber of Teams: ", ["Select", [["value", ["variable", "selectVal"]], ["options", ["expression", "[\"2\", \"4\"]"]]], []]]]]], ["h2", [], ["Where does ", "1", " in ", "9", ".", "2", " quintillion come from?"]], ["p", [], ["To understand where these odds come from, it’s important to understand probability. ", ["link", [["text", ["value", "Probability"]], ["href", ["value", "https://en.wikipedia.org/wiki/Probability"]]], []], " is the extent\nto which something is probable, or in simpler terms, the likelihood of something happening or being the case."]], ["p", [], ["Let’s start small scale.\nLet’s assume we have 2 teams, and 1 game being played. If there are two teams, assuming teams are equal in skill and all other things held constant, each team will have a 50% chance \nor 1/2 probability of winning the match."]], ["p", [], ["If we have 4 teams, with 3 games being played, assuming teams are equal in skill and all other things held constant, each team will have a 1/8 probability of winning."]]]], ["waypoint", [], [["aside", [], []], ["h2", [], ["Where do these numbers come from?"]], ["p", [], ["The probabilities above assume that all teams in the tournament are equal and thus have an equal probability of winning a match. That is, with this reasoning, we assume that Duke University\nand Washington State University are equal matches (when they are very much not). For the purpose of understanding probability, we will hold this assumption."]], ["p", [], ["We can use the equation to understand this further:", ["Equation", [], ["\n  f(n) = (1/2)^n"]], "\nThe probability of getting a perfect bracket is dependent on n, the number of teams there are in the bracket. "]]]], ["waypoint", [], [["h2", [], ["What are the odds based off ranking?"]], ["p", [], [["aside", [], [["data", [["name", ["value", "simpleodds"]], ["source", ["value", "simpleOddsJSON.json"]]], []], ["var", [["name", ["value", "seedSelect"]], ["value", ["value", 1]]], []], ["p", [], ["Selected Team Seed: ", ["Display", [["value", ["variable", "seedSelect"]]], []], ["IdyllVegaLite", [["data", ["expression", "simpleodds.slice(seedSelect-1, seedSelect)"]], ["spec", ["expression", "{\n     width: 500,\n     height: 100,\n       \"layer\": [{\n            \"mark\": \"bar\",\n            \"encoding\": {\n                x: {\n                      field: \"p_win\",\n                      type: \"quantitative\",\n                      axis: {title: \"Chance of Winning (Percent)\"},\n                      stack: \"normalize\",\n                      scale: { domain: [0, 100] }\n                },\n           }\n        }, {\n           \"mark\": {\n            \"type\": \"text\",\n            \"align\": \"left\",\n            \"baseline\": \"middle\",\n            \"dx\": 3\n        },\n        \"encoding\": {\n            x: {\n                   field: \"p_win\",\n                   type: \"quantitative\",\n                   axis: {title: \"Chance of Winning (Percent)\"},\n                   stack: \"normalize\",\n                   scale: { domain: [0, 100] }\n            },\n            \"text\": {\"field\": \"p_win\", \"type\": \"quantitative\"},\n          }\n        }]\n}"]]], []]]]]], "\nWe can make this more realistic. If we neglect the assumption that all teams are equal, we can start to understand how teams will actually fare in the tournament to make a better prediction \nof who will win."]], ["p", [], ["In the tournament, each team is given a ranking that depends on their play throughout the year leading up to the tournament. Within each of the four divisions, teams are ranked 1 through 16 \nand from these numbers their first games are decided. The games are decided so that, initially, the #1 ranked (seeded) team plays the #16 seed team, the #2 seed plays #15, #3 seed plays #14 \nseed, and so on. Historically, these teams have a set percentage of winning the first round based off these ranks. The visualization to the right shows the likelihood of each team winning \ntheir first game based off their rank."]], ["p", [], ["Select Team Seed: 1", ["Range", [["value", ["variable", "seedSelect"]], ["min", ["value", 1]], ["max", ["value", 16]]], []], "16"]]]], ["waypoint", [], [["aside", [], [["TeamHistory", [["state", ["variable", "radioVal"]], ["final", ["variable", "final"]], ["elite", ["variable", "elite"]], ["sweet", ["variable", "sweet"]], ["natWins", ["variable", "natWins"]], ["natApps", ["variable", "natApps"]]], []]]], ["h2", [], ["Jon’s Section to Fill In"]], ["p", [], ["As we begin to further understand how data can help narrow the odds of getting a perfect bracket, understanding how teams have performed in the past is a big indicator of how they might \nperform in the future."]], ["p", [], ["The NCAA started recording where teams got in the tournament dating back to 1985. The visualization to the right highlights the teams that have made it to each major point in the tournament. \nThe Sweet 16 is comprised of the 16 teams remaining in the tournament, 4 from each division, the Elite 8 is comprised of 8 and so on. As the visualization shows, only 17 different teams have won\n the tournament and knowing this gives us a better probability of knowing which teams will win the tournament. Furthermore, being able to spot trends can greatly increase the odds if a better \n bracket, for example if a team generally makes it to the Sweet 16 but then crumbles under the pressure you can comfortably guess how far they might make it again this year."]], ["data", [["name", ["value", "final"]], ["source", ["value", "final4.json"]]], []], ["data", [["name", ["value", "elite"]], ["source", ["value", "elite8.json"]]], []], ["data", [["name", ["value", "sweet"]], ["source", ["value", "sweet16.json"]]], []], ["data", [["name", ["value", "natWins"]], ["source", ["value", "natWins.json"]]], []], ["data", [["name", ["value", "natApps"]], ["source", ["value", "natApp.json"]]], []], ["var", [["name", ["value", "radioVal"]], ["value", ["value", "final"]]], []], ["Radio", [["value", ["variable", "radioVal"]], ["options", ["expression", "[{ value:\"final\", label: \"Final 4     \" }, { value:\"elite\", label: \"Elite 8     \" }, { value: \"sweet\", label: \"Sweet 16     \" }, { value: \"natWins\", label: \"National Wins     \" }, { value: \"natApps\", label: \"National Appearances\" }]"]]], []]]]];
 
 },{}],"__IDYLL_COMPONENTS__":[function(require,module,exports){
 'use strict';
@@ -116362,8 +116431,8 @@ module.exports = {
 	'display': require('/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/display.js'),
 	'idyll-vega-lite': require('/Users/Michelle/node_modules/idyll-vega-lite/lib.js'),
 	'range': require('/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/range.js'),
-	'radio': require('/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/radio.js'),
-	'team-history': require('/Users/Michelle/Documents/INFO474/march-madness-vis/March-Madness-Viz/components/team-history.js')
+	'team-history': require('/Users/Michelle/Documents/INFO474/march-madness-vis/March-Madness-Viz/components/team-history.js'),
+	'radio': require('/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/radio.js')
 };
 
 },{"/Users/Michelle/Documents/INFO474/march-madness-vis/March-Madness-Viz/components/brackets.js":"/Users/Michelle/Documents/INFO474/march-madness-vis/March-Madness-Viz/components/brackets.js","/Users/Michelle/Documents/INFO474/march-madness-vis/March-Madness-Viz/components/custom-d3-component.js":"/Users/Michelle/Documents/INFO474/march-madness-vis/March-Madness-Viz/components/custom-d3-component.js","/Users/Michelle/Documents/INFO474/march-madness-vis/March-Madness-Viz/components/team-history.js":"/Users/Michelle/Documents/INFO474/march-madness-vis/March-Madness-Viz/components/team-history.js","/Users/Michelle/node_modules/idyll-vega-lite/lib.js":"/Users/Michelle/node_modules/idyll-vega-lite/lib.js","/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/aside.js":"/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/aside.js","/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/display.js":"/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/display.js","/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/equation.js":"/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/equation.js","/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/header.js":"/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/header.js","/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/link.js":"/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/link.js","/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/radio.js":"/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/radio.js","/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/range.js":"/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/range.js","/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/select.js":"/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/select.js","/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/waypoint.js":"/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/waypoint.js"}],"__IDYLL_DATA__":[function(require,module,exports){

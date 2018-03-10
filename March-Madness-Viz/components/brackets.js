@@ -12,93 +12,285 @@ var root;
 class Brackets extends D3Component {
 
   initialize(node, props) {
-    root = props.data;
-
-    // const svg = this.svg = d3.select(node).append('svg');
-    // svg.attr('viewBox', `0 0 ${size} ${size}`)
-    //   .style('width', '100%')
-    //   .style('height', 'auto');
-
-    var margin = { top: 30, right: 10, bottom: 10, left: 10 },
-      width = 960 - margin.left - margin.right,
-      halfWidth = width / 2,
-      height = 500 - margin.top - margin.bottom,
-      i = 0,
-      duration = 500,
-      root;
-
-    var getChildren = function (d) {
-      var a = [];
-      if (d.winners) for (var i = 0; i < d.winners.length; i++) {
-        d.winners[i].isRight = false;
-        d.winners[i].parent = d;
-        a.push(d.winners[i]);
+    var treeData =
+      {
+        "name": "Champion",
+        "winners": [
+          {
+            "name": "Winner Left 1",
+            "winners": [
+              { "name": "Winner Left 3" },
+              { "name": "Winner Left 4" }
+            ]
+          },
+          { "name": "Winner Left 2" }
+        ],
+        "challengers": [
+          {
+            "name": "Final 4 South",
+            "challengers": [
+              {
+                "name": "Elite 8 South",
+                "challengers": [
+                  {
+                    "name": "Sweet 16 South",
+                    "challengers": [
+                      {
+                        "name": "Round 2 South",
+                        "challengers": [
+                          { "name": "Round 1 (1)" },
+                          { "name": "Round 1 (16)" }
+                        ]
+                      },
+                      {
+                        "name": "Round 2 South",
+                        "challengers": [
+                          { "name": "Round 1 (2)" },
+                          { "name": "Round 1 (15)" }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Sweet 16 South",
+                    "challengers": [
+                      {
+                        "name": "Round 2 South",
+                        "challengers": [
+                          { "name": "Round 1 (3)" },
+                          { "name": "Round 1 (14)" }
+                        ]
+                      },
+                      {
+                        "name": "Round 2 South",
+                        "challengers": [
+                          { "name": "Round 1 (4)" },
+                          { "name": "Round 1 (13)" }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "Elite 8 South",
+                "challengers": [
+                  {
+                    "name": "Sweet 16 South",
+                    "challengers": [
+                      {
+                        "name": "Round 2 South",
+                        "challengers": [
+                          { "name": "Round 1 (5)" },
+                          { "name": "Round 1 (12)" }
+                        ]
+                      },
+                      {
+                        "name": "Round 2 South",
+                        "challengers": [
+                          { "name": "Round 1 (6)" },
+                          { "name": "Round 1 (11)" }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Sweet 16 South",
+                    "challengers": [
+                      {
+                        "name": "Round 2 South ",
+                        "challengers": [
+                          { "name": "Round 1 (7)" },
+                          { "name": "Round 1 (10)" }
+                        ]
+                      },
+                      {
+                        "name": "Round 2 South",
+                        "challengers": [
+                          { "name": "Round 1 (8)" },
+                          { "name": "Round 1 (9)" }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Final 4 East",
+            "challengers": [
+              {
+                "name": "Elite 8 East",
+                "challengers": [
+                  {
+                    "name": "Sweet 16 East",
+                    "challengers": [
+                      {
+                        "name": "Round 2 East",
+                        "challengers": [
+                          { "name": "Round 1 (1)" },
+                          { "name": "Round 1 (16)" }
+                        ]
+                      },
+                      {
+                        "name": "Round 2 East",
+                        "challengers": [
+                          { "name": "Round 1 (2)" },
+                          { "name": "Round 1 (15)" }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Sweet 16 East",
+                    "challengers": [
+                      {
+                        "name": "Round 2 East",
+                        "challengers": [
+                          { "name": "Round 1 (3)" },
+                          { "name": "Round 1 (14)" }
+                        ]
+                      },
+                      {
+                        "name": "Round 2 East",
+                        "challengers": [
+                          { "name": "Round 1 (4)" },
+                          { "name": "Round 1 (13)" }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "Elite 8 East",
+                "challengers": [
+                  {
+                    "name": "Sweet 16 East",
+                    "challengers": [
+                      {
+                        "name": "Round 2 East",
+                        "challengers": [
+                          { "name": "Round 1 (5)" },
+                          { "name": "Round 1 (12)" }
+                        ]
+                      },
+                      {
+                        "name": "Round 2 East",
+                        "challengers": [
+                          { "name": "Round 1 (6)" },
+                          { "name": "Round 1 (11)" }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Sweet 16 East",
+                    "challengers": [
+                      {
+                        "name": "Round 2 East",
+                        "challengers": [
+                          { "name": "Round 1 (7)" },
+                          { "name": "Round 1 (10)" }
+                        ]
+                      },
+                      {
+                        "name": "Round 2 East",
+                        "challengers": [
+                          { "name": "Round 1 (8)" },
+                          { "name": "Round 1 (9)" }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       }
-      if (d.challengers) for (var i = 0; i < d.challengers.length; i++) {
-        d.challengers[i].isRight = true;
-        d.challengers[i].parent = d;
-        a.push(d.challengers[i]);
-      }
-      return a.length ? a : null;
-    };
 
-    var tree = d3.tree()
+    // set the dimensions and margins of the diagram
+    var margin = { top: 20, right: 100, bottom: 30, left: 100 },
+      width = 660 - margin.left - margin.right,
+      height = 500 - margin.top - margin.bottom;
+
+    // declares a tree layout and assigns the size
+    var treemapr = d3.tree()
       .size([height, width]);
 
-    var diagonal = (function link(d) {
-      return "M" + d.source.y + "," + d.source.x
-        + "C" + (d.source.y + d.target.y) / 2 + "," + d.source.x
-        + " " + (d.source.y + d.target.y) / 2 + "," + d.target.x
-        + " " + d.target.y + "," + d.target.x;
+    var treemapl = d3.tree()
+      .size([height, width]);
+
+    //  assigns the data to a hierarchy using parent-child relationships
+    var nodesr = d3.hierarchy(treeData, function (d) {
+      return d.challengers;
     });
 
-    var elbow = function (d, i) {
-      var source = calcLeft(d.source);
-      var target = calcLeft(d.target);
-      var hy = (target.y - source.y) / 2;
-      if (d.isRight) hy = -hy;
-      return "M" + source.y + "," + source.x
-        + "H" + (source.y + hy)
-        + "V" + target.x + "H" + target.y;
-    };
-    var connector = elbow;
+    var nodesl = d3.hierarchy(treeData, function (d) {
+      return d.winners;
+    });
 
-    var calcLeft = function (d) {
-      var l = d.y;
-      if (!d.isRight) {
-        l = d.y - halfWidth;
-        l = halfWidth - l;
-      }
-      return { x: d.x, y: l };
-    };
+    // maps the node data to the tree layout
+    nodesr = treemapr(nodesr);
+    nodesl = treemapl(nodesl);
 
-    const svg = this.svg = d3.select(node).append('svg');
-    svg.attr('viewBox', `0 0 ${size} ${size}`)
-      .style('width', '100%')
-      .style('height', '100%');
+    // append the svg object to the body of the page
+    // appends a 'group' element to 'svg'
+    // moves the 'group' element to the top left margin
+    var svg = d3.select(node).append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom),
+      g = svg.append("g")
+        .attr("transform",
+        "translate(" + margin.left + "," + margin.top + ")");
+
+    // adds the links between the nodes
+    var link = g.selectAll(".link")
+      .data(nodesr.descendants().slice(1))
+      .enter().append("path")
+      .attr("class", "link")
+      .attr("d", function (d) {
+        return "M" + d.y + "," + d.x
+          + "C" + (d.y + d.parent.y) / 2 + "," + d.x
+          + " " + (d.y + d.parent.y) / 2 + "," + d.parent.x
+          + " " + d.parent.y + "," + d.parent.x;
+      })
+      .style("fill", "none")
+      .style("stroke", "#ccc")
+      .style("stroke-width", "1.5px");
+
+    // adds each node as a group
+    var node = g.selectAll(".node")
+      .data(nodesr.descendants())
+      .enter().append("g")
+      .attr("class", function (d) {
+        return "node" +
+          (d.children ? " node--internal" : " node--leaf");
+      })
+      .attr("transform", function (d) {
+        return "translate(" + d.y + "," + d.x + ")";
+      });
+
+    // adds the circle to the node
+    node.append("circle")
+      .attr("r", 5)
+      .style("cursor", "pointer")
+      .style("fill", "#fff")
+      .style("stroke", "steelblue")
+      .style("stroke-width", "1.5px")
 
 
-    //   var t1 = d3.layout.tree().size([height, halfWidth]).children(function (d) { return d.winners; }),
-    //     t2 = d3.layout.tree().size([height, halfWidth]).children(function (d) { return d.challengers; });
-    //   t1.nodes(root);
-    //   t2.nodes(root);
-
-    //   var rebuildChildren = function (node) {
-    //     node.children = getChildren(node);
-    //     if (node.children) node.children.forEach(rebuildChildren);
-    //   }
-    //   rebuildChildren(root);
-    //   root.isRight = false;
-    //   update(root);
-    // });
-
-    root.x0 = height / 2;
-    root.y0 = width / 2;
-    var t1 = d3.tree().size([height, halfWidth]).children(function (d) { return d.winners; }),
-      t2 = d3.tree().size([height, halfWidth]).children(function (d) { return d.challengers; });
-
-
-    console.log(t1)
+    // adds the text to the node
+    node.append("text")
+      .attr("dy", ".35em")
+      .attr("x", function (d) { return d.children ? -13 : 13; })
+      .style("text-anchor", function (d) {
+        return d.children ? "end" : "start";
+      })
+      .style("font-size", "10px")
+      .text(function (d) { return d.data.name; });
 
 
 

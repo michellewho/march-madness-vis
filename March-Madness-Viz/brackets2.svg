@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="600" height="600" viewBox="0 0 1200 1200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="bracketstructure">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>Desktop</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop" stroke-width="8">
+            <g id="Group" transform="translate(1139.000000, 707.000000)" stroke-linecap="square">
+                <path d="M0.5,4 L197.5,4" id="Line" stroke="#FFB9B9"></path>
+                <path d="M110.5,179 L307.5,179" id="Line" stroke="#EDEBCA"></path>
+            </g>
+            <g id=".round1west" transform="translate(104.000000, 880.000000)" stroke="#A80317">
+                <polyline id="Path-2" points="0.500467805 179 280.504486 179 280.504486 220.012291 1.13686838e-13 220.012291"></polyline>
+                <polyline id="Path-2" points="0.500467805 89 280.504486 89 280.504486 130.012291 1.13686838e-13 130.012291"></polyline>
+                <polyline id="Path-2" points="0.500467805 0 280.504486 0 280.504486 41.0122915 1.13686838e-13 41.0122915"></polyline>
+                <polyline id="Path-2" points="0.500467805 354 280.504486 354 280.504486 395.012291 1.13686838e-13 395.012291"></polyline>
+                <polyline id="Path-2" points="0.500467805 264 280.504486 264 280.504486 305.012291 1.13686838e-13 305.012291"></polyline>
+                <polyline id="Path-2" points="0.500467805 618 280.504486 618 280.504486 659.012291 1.13686838e-13 659.012291"></polyline>
+                <polyline id="Path-2" points="0.500467805 529 280.504486 529 280.504486 570.012291 1.13686838e-13 570.012291"></polyline>
+                <polyline id="Path-2" points="0.500467805 439 280.504486 439 280.504486 480.012291 1.13686838e-13 480.012291"></polyline>
+            </g>
+            <g id=".round1south" transform="translate(104.000000, 114.000000)" stroke="#194A83">
+                <polyline id="Path-2" points="0.500467805 179 280.504486 179 280.504486 220.012291 1.13686838e-13 220.012291"></polyline>
+                <polyline id="Path-2" points="0.500467805 89 280.504486 89 280.504486 130.012291 1.13686838e-13 130.012291"></polyline>
+                <polyline id="Path-2" points="0.500467805 0 280.504486 0 280.504486 41.0122915 1.13686838e-13 41.0122915"></polyline>
+                <polyline id="Path-2" points="0.500467805 0 280.504486 0 280.504486 41.0122915 1.13686838e-13 41.0122915"></polyline>
+                <polyline id="Path-2" points="0.500467805 354 280.504486 354 280.504486 395.012291 1.13686838e-13 395.012291"></polyline>
+                <polyline id="Path-2" points="0.500467805 264 280.504486 264 280.504486 305.012291 1.13686838e-13 305.012291"></polyline>
+                <polyline id="Path-2" points="0.500467805 618 280.504486 618 280.504486 659.012291 1.13686838e-13 659.012291"></polyline>
+                <polyline id="Path-2" points="0.500467805 529 280.504486 529 280.504486 570.012291 1.13686838e-13 570.012291"></polyline>
+                <polyline id="Path-2" points="0.500467805 439 280.504486 439 280.504486 480.012291 1.13686838e-13 480.012291"></polyline>
+            </g>
+            <g id=".round1east" transform="translate(2196.000000, 106.000000)" stroke="#005E11">
+                <polyline id="Path-2" transform="translate(141.252243, 378.506146) scale(-1, 1) translate(-141.252243, -378.506146) " points="1.5004678 358 281.504486 358 281.504486 399.012291 1 399.012291"></polyline>
+                <polyline id="Path-2" transform="translate(140.252243, 20.506146) scale(-1, 1) translate(-140.252243, -20.506146) " points="0.500467805 0 280.504486 0 280.504486 41.0122915 0 41.0122915"></polyline>
+                <polyline id="Path-2" transform="translate(141.252243, 288.506146) scale(-1, 1) translate(-141.252243, -288.506146) " points="1.5004678 268 281.504486 268 281.504486 309.012291 1 309.012291"></polyline>
+                <polyline id="Path-2" transform="translate(141.252243, 199.506146) scale(-1, 1) translate(-141.252243, -199.506146) " points="1.5004678 179 281.504486 179 281.504486 220.012291 1 220.012291"></polyline>
+                <polyline id="Path-2" transform="translate(141.252243, 646.506146) scale(-1, 1) translate(-141.252243, -646.506146) " points="1.5004678 626 281.504486 626 281.504486 667.012291 1 667.012291"></polyline>
+                <polyline id="Path-2" transform="translate(141.252243, 556.506146) scale(-1, 1) translate(-141.252243, -556.506146) " points="1.5004678 536 281.504486 536 281.504486 577.012291 1 577.012291"></polyline>
+                <polyline id="Path-2" transform="translate(141.252243, 467.506146) scale(-1, 1) translate(-141.252243, -467.506146) " points="1.5004678 447 281.504486 447 281.504486 488.012291 1 488.012291"></polyline>
+                <polyline id="Path-2" transform="translate(141.252243, 109.506146) scale(-1, 1) translate(-141.252243, -109.506146) " points="1.5004678 89 281.504486 89 281.504486 130.012291 1 130.012291"></polyline>
+                <polyline id="Path-2" transform="translate(141.252243, 378.506146) scale(-1, 1) translate(-141.252243, -378.506146) " points="1.5004678 358 281.504486 358 281.504486 399.012291 1 399.012291"></polyline>
+                <polyline id="Path-2" transform="translate(140.252243, 20.506146) scale(-1, 1) translate(-140.252243, -20.506146) " points="0.500467805 0 280.504486 0 280.504486 41.0122915 0 41.0122915"></polyline>
+                <polyline id="Path-2" transform="translate(141.252243, 288.506146) scale(-1, 1) translate(-141.252243, -288.506146) " points="1.5004678 268 281.504486 268 281.504486 309.012291 1 309.012291"></polyline>
+                <polyline id="Path-2" transform="translate(141.252243, 199.506146) scale(-1, 1) translate(-141.252243, -199.506146) " points="1.5004678 179 281.504486 179 281.504486 220.012291 1 220.012291"></polyline>
+                <polyline id="Path-2" transform="translate(141.252243, 646.506146) scale(-1, 1) translate(-141.252243, -646.506146) " points="1.5004678 626 281.504486 626 281.504486 667.012291 1 667.012291"></polyline>
+                <polyline id="Path-2" transform="translate(141.252243, 556.506146) scale(-1, 1) translate(-141.252243, -556.506146) " points="1.5004678 536 281.504486 536 281.504486 577.012291 1 577.012291"></polyline>
+                <polyline id="Path-2" transform="translate(141.252243, 467.506146) scale(-1, 1) translate(-141.252243, -467.506146) " points="1.5004678 447 281.504486 447 281.504486 488.012291 1 488.012291"></polyline>
+                <polyline id="Path-2" transform="translate(141.252243, 109.506146) scale(-1, 1) translate(-141.252243, -109.506146) " points="1.5004678 89 281.504486 89 281.504486 130.012291 1 130.012291"></polyline>
+            </g>
+            <g id=".round1midwest" transform="translate(2196.000000, 880.000000)" stroke="#B67101">
+                <polyline id="Path-2" transform="translate(141.252243, 378.506146) scale(-1, 1) translate(-141.252243, -378.506146) " points="1.5004678 358 281.504486 358 281.504486 399.012291 1 399.012291"></polyline>
+                <polyline id="Path-2" transform="translate(140.252243, 20.506146) scale(-1, 1) translate(-140.252243, -20.506146) " points="0.500467805 0 280.504486 0 280.504486 41.0122915 0 41.0122915"></polyline>
+                <polyline id="Path-2" transform="translate(141.252243, 288.506146) scale(-1, 1) translate(-141.252243, -288.506146) " points="1.5004678 268 281.504486 268 281.504486 309.012291 1 309.012291"></polyline>
+                <polyline id="Path-2" transform="translate(141.252243, 199.506146) scale(-1, 1) translate(-141.252243, -199.506146) " points="1.5004678 179 281.504486 179 281.504486 220.012291 1 220.012291"></polyline>
+                <polyline id="Path-2" transform="translate(141.252243, 646.506146) scale(-1, 1) translate(-141.252243, -646.506146) " points="1.5004678 626 281.504486 626 281.504486 667.012291 1 667.012291"></polyline>
+                <polyline id="Path-2" transform="translate(141.252243, 556.506146) scale(-1, 1) translate(-141.252243, -556.506146) " points="1.5004678 536 281.504486 536 281.504486 577.012291 1 577.012291"></polyline>
+                <polyline id="Path-2" transform="translate(141.252243, 467.506146) scale(-1, 1) translate(-141.252243, -467.506146) " points="1.5004678 447 281.504486 447 281.504486 488.012291 1 488.012291"></polyline>
+                <polyline id="Path-2" transform="translate(141.252243, 109.506146) scale(-1, 1) translate(-141.252243, -109.506146) " points="1.5004678 89 281.504486 89 281.504486 130.012291 1 130.012291"></polyline>
+            </g>
+            <g id=".round2south" transform="translate(385.000000, 128.000000)" stroke="#4990E2">
+                <polyline id="Path-3" points="2 0 196.510283 0 196.510283 89 2 89"></polyline>
+                <polyline id="Path-3" points="2 178 196.510283 178 196.510283 267 2 267"></polyline>
+                <polyline id="Path-3" points="0 356 194.510283 356 194.510283 445 0 445"></polyline>
+                <polyline id="Path-3" points="1 534 195.510283 534 195.510283 623 1 623"></polyline>
+            </g>
+            <g id=".round2west" transform="translate(385.000000, 899.000000)" stroke="#D0011B">
+                <polyline id="Path-3" points="0 0 194.510283 0 194.510283 89 0 89"></polyline>
+                <polyline id="Path-3" points="1 178 195.510283 178 195.510283 267 1 267"></polyline>
+                <polyline id="Path-3" points="2 353 196.510283 353 196.510283 442 2 442"></polyline>
+                <polyline id="Path-3" points="3 531 197.510283 531 197.510283 620 3 620"></polyline>
+            </g>
+            <g id=".round2east" transform="translate(1997.000000, 128.000000)" stroke="#0A9425">
+                <polyline id="Path-3" transform="translate(99.255141, 44.500000) scale(-1, 1) translate(-99.255141, -44.500000) " points="2 0 196.510283 0 196.510283 89 2 89"></polyline>
+                <polyline id="Path-3" transform="translate(99.255141, 222.500000) scale(-1, 1) translate(-99.255141, -222.500000) " points="2 178 196.510283 178 196.510283 267 2 267"></polyline>
+                <polyline id="Path-3" transform="translate(97.255141, 400.500000) scale(-1, 1) translate(-97.255141, -400.500000) " points="0 356 194.510283 356 194.510283 445 0 445"></polyline>
+                <polyline id="Path-3" transform="translate(98.255141, 578.500000) scale(-1, 1) translate(-98.255141, -578.500000) " points="1 534 195.510283 534 195.510283 623 1 623"></polyline>
+            </g>
+            <g id=".round2midwest" transform="translate(1997.000000, 899.000000)" stroke="#E5981A">
+                <polyline id="Path-3" transform="translate(97.255141, 44.500000) scale(-1, 1) translate(-97.255141, -44.500000) " points="0 0 194.510283 0 194.510283 89 0 89"></polyline>
+                <polyline id="Path-3" transform="translate(98.255141, 222.500000) scale(-1, 1) translate(-98.255141, -222.500000) " points="1 178 195.510283 178 195.510283 267 1 267"></polyline>
+                <polyline id="Path-3" transform="translate(99.255141, 397.500000) scale(-1, 1) translate(-99.255141, -397.500000) " points="2 353 196.510283 353 196.510283 442 2 442"></polyline>
+                <polyline id="Path-3" transform="translate(100.255141, 575.500000) scale(-1, 1) translate(-100.255141, -575.500000) " points="3 531 197.510283 531 197.510283 620 3 620"></polyline>
+            </g>
+            <g id=".sweet16south" transform="translate(582.000000, 168.000000)" stroke="#A5CAF5">
+                <polyline id="Path-4" points="0 -5.68434189e-14 183.500681 -1.19027815e-17 183.500681 180.006256 2.45594477 180.006256"></polyline>
+                <polyline id="Path-4" points="0 359 183.500681 359 183.500681 539.006256 2.45594477 539.006256"></polyline>
+            </g>
+            <g id=".sweet16west" transform="translate(581.000000, 943.000000)" stroke="#FE435A">
+                <polyline id="Path-4" points="0 0 183.500681 5.68315161e-14 183.500681 180.006256 2.45594477 180.006256"></polyline>
+                <polyline id="Path-4" points="1 353 184.500681 353 184.500681 533.006256 3.45594477 533.006256"></polyline>
+            </g>
+            <g id=".sweet16east" transform="translate(1815.000000, 168.000000)" stroke="#7ED321">
+                <polyline id="Path-4" transform="translate(91.750341, 90.003128) scale(-1, 1) translate(-91.750341, -90.003128) " points="0 -5.68434189e-14 183.500681 -1.19027815e-17 183.500681 180.006256 2.45594477 180.006256"></polyline>
+                <polyline id="Path-4" transform="translate(92.750341, 449.003128) scale(-1, 1) translate(-92.750341, -449.003128) " points="1 359 184.500681 359 184.500681 539.006256 3.45594477 539.006256"></polyline>
+            </g>
+            <g id=".sweet16midwest" transform="translate(1815.000000, 942.000000)" stroke="#FFBA47">
+                <polyline id="Path-4" transform="translate(91.750341, 90.003128) scale(-1, 1) translate(-91.750341, -90.003128) " points="0 0 183.500681 5.68315161e-14 183.500681 180.006256 2.45594477 180.006256"></polyline>
+                <polyline id="Path-4" transform="translate(92.750341, 443.003128) scale(-1, 1) translate(-92.750341, -443.003128) " points="1 353 184.500681 353 184.500681 533.006256 3.45594477 533.006256"></polyline>
+            </g>
+            <g id=".elite8south" transform="translate(768.000000, 258.000000)" stroke="#B5D7FF">
+                <polyline id="Path-5" points="1.0025489 0 187.526676 0 187.526676 355.022263 0 355.022263"></polyline>
+            </g>
+            <g id=".final4south" transform="translate(955.000000, 440.000000)" stroke="#F3B8FF">
+                <g id="Group-9">
+                    <polyline id="Path-5" points="0.981025264 0 183.500681 0 183.500681 767.511132 0 767.511132"></polyline>
+                </g>
+            </g>
+            <g id=".elite8west" transform="translate(767.000000, 1030.000000)" stroke="#FF8989">
+                <polyline id="Path-5" points="1.0025489 0 187.526676 0 187.526676 355.022263 0 355.022263"></polyline>
+            </g>
+            <g id=".elite8east" transform="translate(1631.000000, 257.000000)" stroke="#B8E986">
+                <polyline id="Path-5" transform="translate(93.763338, 177.511132) scale(-1, 1) translate(-93.763338, -177.511132) " points="1.0025489 0 187.526676 0 187.526676 355.022263 0 355.022263"></polyline>
+            </g>
+            <g id=".final4east" transform="translate(1447.000000, 440.000000)" stroke="#F9EE5A">
+                <polyline id="Path-5" transform="translate(91.750341, 383.755566) scale(-1, 1) translate(-91.750341, -383.755566) " points="0.981025264 0 183.500681 0 183.500681 767.511132 0 767.511132"></polyline>
+            </g>
+            <g id=".elite8midwest" transform="translate(1631.000000, 1030.000000)" stroke="#FFD691">
+                <polyline id="Path-5" transform="translate(93.763338, 177.511132) scale(-1, 1) translate(-93.763338, -177.511132) " points="1.0025489 0 187.526676 0 187.526676 355.022263 0 355.022263"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>

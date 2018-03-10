@@ -19,9 +19,9 @@ var x = d3.scaleBand()
 class TeamHistory extends D3Component {
   initialize(node, props) {
     const container = d3.select(node).append('svg');
-    container.attr('viewBox', `0 0 ${size * 2} ${size * 5}`)
-      .style('width', '140%')
-      .style('height', '100%');
+    container.attr('viewBox', `-40 0 ${size * 2} ${size * 5}`)
+      .style('width', '180%')
+      .style('height', '110%');
 
     d3.select(node).attr("class", "visContainer")
 
@@ -67,16 +67,16 @@ class TeamHistory extends D3Component {
   }
 
   update(props) {
-    console.log(props.natApps)
+    // console.log(props.natApps)
     function drawVis(datasetVis, height) {
       // console.log(datasetVis)
       x.domain([0, d3.max(datasetVis, function (d) { return d.APP; })])
       y.domain(datasetVis.map(function (d) { return d.TEAMS; }));
 
       const container = d3.select('div.visContainer').append('svg');
-      container.attr('viewBox', `0 0 ${size * 2} ${size * 5}`)
-        .style('width', '140%')
-        .style('height', '100%');
+      container.attr('viewBox', `-40 0 ${size * 2} ${size * 5}`)
+        .style('width', '180%')
+        .style('height', '110%');
 
       container.append("g")
         .attr('transform', 'translate(' + [150] + ')')
