@@ -8,6 +8,10 @@
 [waypoint]
 [aside]
 
+[data name:"brackets" source:"brackets.json" /]
+[Brackets data:brackets/]
+
+
 [/aside]
 ## Overview of March Madness
 Every year, college basketball teams compete to be one of the 64 teams that are invited to play for the NCAA National Championship in the March Madness tournament. As the largest 
@@ -32,20 +36,6 @@ The bracket is divided into 4 main sections denoting their geographical areas. T
 seed in each division. After this, the 64 remaining teams play in "The Round of 64". After this, the winning teams play in "The Round of 32". The winning teams then proceed to "The 
 Sweet Sixteen", then "The Elite 8", next "The Final Four", and finally "The National Championship" game.
 [/waypoint]
-
-[aside]
-[data name:"elite" source:"elite8.csv" /]
-
-[TeamHistory data:elite /]
-
-
-[/aside]
-
-## Jon's Section to Fill In
-Jon's section to fill in
-[var name:"radioVal" value:"Sweet16" /]
-[Radio value:radioVal options:`["Sweet16", "Elite8", "Final4", "NatApp", "NatWins"]`  /]
-
 
 [waypoint]
 ## Bracket Madness
@@ -137,15 +127,38 @@ Selected Team Seed: [Display value:seedSelect /]
 }` /]
 
 [/aside]
-We can make this more realistic. If we neglect the assumption that all teams are equal, we can start to understand how teams will actually fare in the tournament to make a better prediction
+We can make this more realistic. If we neglect the assumption that all teams are equal, we can start to understand how teams will actually fare in the tournament to make a better prediction 
 of who will win.
 
-In the tournament, each team is given a ranking that depends on their play throughout the year leading up to the tournament. Within each of the four divions, teams are ranked 1 through 16 and
- from these numbers their first games are decided. The games are decided so that, initially, the #1 ranked (seeded) team plays the #16 seed team, the #2 seed plays #15, #3 seed plays #14 seed,
-  and so on. Historically, these teams have a set percentage of winning the first round based off these ranks. The visualization to the right shows the likelihood of each team winning their 
-  first game based off their rank.
+In the tournament, each team is given a ranking that depends on their play throughout the year leading up to the tournament. Within each of the four divisions, teams are ranked 1 through 16 
+and from these numbers their first games are decided. The games are decided so that, initially, the #1 ranked (seeded) team plays the #16 seed team, the #2 seed plays #15, #3 seed plays #14 
+seed, and so on. Historically, these teams have a set percentage of winning the first round based off these ranks. The visualization to the right shows the likelihood of each team winning 
+their first game based off their rank.
 
 Select Team Seed: 
 1 [Range value:seedSelect min:1 max:16 /] 16
+
+[/waypoint]
+
+[waypoint]
+## Jon's Section to Fill In
+As we begin to further understand how data can help narrow the odds of getting a perfect bracket, understanding how teams have performed in the past is a big indicator of how they might 
+perform in the future.
+
+The NCAA started recording where teams got in the tournament dating back to 1985. The visualization to the right highlights the teams that have made it to each major point in the tournament. 
+The Sweet 16 is comprised of the 16 teams remaining in the tournament, 4 from each division, the Elite 8 is comprised of 8 and so on. As the visualization shows, only 17 different teams have won
+ the tournament and knowing this gives us a better probability of knowing which teams will win the tournament. Furthermore, being able to spot trends can greatly increase the odds if a better 
+ bracket, for example if a team generally makes it to the Sweet 16 but then crumbles under the pressure you can comfortably guess how far they might make it again this year.
+
+[data name:"final" source:"final4.json" /]
+[data name:"elite" source:"elite8.json" /]
+[data name:"sweet" source:"sweet16.json" /]
+[data name:"natWins" source:"natWins.json" /]
+[data name:"natApps" source:"natApp.json" /]
+
+
+[var name:"radioVal" value: "final" /]
+[Radio value:radioVal options:`[{ value:"final", label: "Final 4     " }, { value:"elite", label: "Elite 8     " }, { value: "sweet", label: "Sweet 16     " }, { value: "natWins", label: "National Wins     " }, { value: "natApps", label: "National Appearances" }]`  /]
+[TeamHistory state:radioVal final:final elite:elite sweet:sweet natWins:natWins natApps:natApps /]
 
 [/waypoint]

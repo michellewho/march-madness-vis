@@ -1,4 +1,4 @@
-require=(function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({"/Users/Michelle/Documents/INFO474/march-madness-vis/March-Madness-Viz/components/custom-d3-component.js":[function(require,module,exports){
+require=(function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({"/Users/Michelle/Documents/INFO474/march-madness-vis/March-Madness-Viz/components/brackets.js":[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -18,8 +18,132 @@ var len = 250;
 var padding = 10;
 var y = 50;
 var x = 50;
+var root;
 
-240 + 240 + 10 + 10;
+var Brackets = function (_D3Component) {
+  _inherits(Brackets, _D3Component);
+
+  function Brackets() {
+    _classCallCheck(this, Brackets);
+
+    return _possibleConstructorReturn(this, (Brackets.__proto__ || Object.getPrototypeOf(Brackets)).apply(this, arguments));
+  }
+
+  _createClass(Brackets, [{
+    key: 'initialize',
+    value: function initialize(node, props) {
+      root = props.data;
+
+      // const svg = this.svg = d3.select(node).append('svg');
+      // svg.attr('viewBox', `0 0 ${size} ${size}`)
+      //   .style('width', '100%')
+      //   .style('height', 'auto');
+
+      var margin = { top: 30, right: 10, bottom: 10, left: 10 },
+          width = 960 - margin.left - margin.right,
+          halfWidth = width / 2,
+          height = 500 - margin.top - margin.bottom,
+          i = 0,
+          duration = 500,
+          root;
+
+      var getChildren = function getChildren(d) {
+        var a = [];
+        if (d.winners) for (var i = 0; i < d.winners.length; i++) {
+          d.winners[i].isRight = false;
+          d.winners[i].parent = d;
+          a.push(d.winners[i]);
+        }
+        if (d.challengers) for (var i = 0; i < d.challengers.length; i++) {
+          d.challengers[i].isRight = true;
+          d.challengers[i].parent = d;
+          a.push(d.challengers[i]);
+        }
+        return a.length ? a : null;
+      };
+
+      var tree = d3.tree().size([height, width]);
+
+      var diagonal = function link(d) {
+        return "M" + d.source.y + "," + d.source.x + "C" + (d.source.y + d.target.y) / 2 + "," + d.source.x + " " + (d.source.y + d.target.y) / 2 + "," + d.target.x + " " + d.target.y + "," + d.target.x;
+      };
+
+      var elbow = function elbow(d, i) {
+        var source = calcLeft(d.source);
+        var target = calcLeft(d.target);
+        var hy = (target.y - source.y) / 2;
+        if (d.isRight) hy = -hy;
+        return "M" + source.y + "," + source.x + "H" + (source.y + hy) + "V" + target.x + "H" + target.y;
+      };
+      var connector = elbow;
+
+      var calcLeft = function calcLeft(d) {
+        var l = d.y;
+        if (!d.isRight) {
+          l = d.y - halfWidth;
+          l = halfWidth - l;
+        }
+        return { x: d.x, y: l };
+      };
+
+      var svg = this.svg = d3.select(node).append('svg');
+      svg.attr('viewBox', '0 0 ' + size + ' ' + size).style('width', '100%').style('height', '100%');
+
+      //   var t1 = d3.layout.tree().size([height, halfWidth]).children(function (d) { return d.winners; }),
+      //     t2 = d3.layout.tree().size([height, halfWidth]).children(function (d) { return d.challengers; });
+      //   t1.nodes(root);
+      //   t2.nodes(root);
+
+      //   var rebuildChildren = function (node) {
+      //     node.children = getChildren(node);
+      //     if (node.children) node.children.forEach(rebuildChildren);
+      //   }
+      //   rebuildChildren(root);
+      //   root.isRight = false;
+      //   update(root);
+      // });
+
+      root.x0 = height / 2;
+      root.y0 = width / 2;
+      var t1 = d3.tree().size([height, halfWidth]).children(function (d) {
+        return d.winners;
+      }),
+          t2 = d3.tree().size([height, halfWidth]).children(function (d) {
+        return d.challengers;
+      });
+
+      console.log(t1);
+    }
+  }, {
+    key: 'update',
+    value: function update(props) {}
+  }]);
+
+  return Brackets;
+}(D3Component);
+
+module.exports = Brackets;
+
+},{"d3":"/Users/Michelle/Documents/INFO474/march-madness-vis/March-Madness-Viz/node_modules/d3/build/d3.node.js","idyll-d3-component":"/Users/Michelle/Documents/INFO474/march-madness-vis/March-Madness-Viz/node_modules/idyll-d3-component/lib.js","react":"/Users/Michelle/Documents/INFO474/march-madness-vis/March-Madness-Viz/node_modules/react/index.js"}],"/Users/Michelle/Documents/INFO474/march-madness-vis/March-Madness-Viz/components/custom-d3-component.js":[function(require,module,exports){
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var React = require('react');
+var D3Component = require('idyll-d3-component');
+var d3 = require('d3');
+
+var size = 600;
+var len = 250;
+var padding = 10;
+var y = 50;
+var x = 50;
 
 var CustomD3Component = function (_D3Component) {
   _inherits(CustomD3Component, _D3Component);
@@ -117,6 +241,13 @@ var D3Component = require('idyll-d3-component');
 var d3 = require('d3');
 
 var size = 600;
+var margin = { top: 20, right: 50, bottom: 30, left: 40 },
+    width = 960 - margin.left - margin.right,
+    height = 2000 - margin.top - margin.bottom;
+
+var y = d3.scaleBand().range([height, 0]).padding(0.1);
+
+var x = d3.scaleBand().range([0, width]).padding(0.1);
 
 var TeamHistory = function (_D3Component) {
   _inherits(TeamHistory, _D3Component);
@@ -130,14 +261,111 @@ var TeamHistory = function (_D3Component) {
   _createClass(TeamHistory, [{
     key: 'initialize',
     value: function initialize(node, props) {
-      var svg = this.svg = d3.select(node).append('svg');
-      svg.attr('viewBox', '0 0 ' + size + ' ' + size).style('width', '100%').style('height', 'auto');
+      var container = d3.select(node).append('svg');
+      container.attr('viewBox', '0 0 ' + size * 2 + ' ' + size * 5).style('width', '140%').style('height', '100%');
 
-      console.log(props);
+      d3.select(node).attr("class", "visContainer");
+
+      x.domain([0, d3.max(props.final, function (d) {
+        return d.APP;
+      })]);
+      y.domain(props.final.map(function (d) {
+        return d.TEAMS;
+      }));
+
+      container.append("g").attr('transform', 'translate(' + [150] + ')').style("font-size", "15px").call(d3.axisLeft(y));
+
+      var div = d3.select("body").append("div").attr("class", "tooltip").attr("x", 20).style("opacity", 0);
+
+      var bars = container.selectAll("rect").data(props.final).enter().append("rect").attr("height", height).attr('transform', 'translate(' + [150] + ')').attr("y", function (d) {
+        return y(d.TEAMS);
+      }).attr("class", "rect").style("fill", "steelblue")
+      // .on("mouseover", function (d) {
+      //   div.html("hi")
+      //     .style("left", (d3.event.pageX + 25) + "px")
+      //     .style("top", (d3.event.pageY - 28) + "px");
+      // })
+      .on("mouseover", function (d) {
+        d3.select(this).style("fill", "brown");
+      }).on("mouseout", function (d) {
+        d3.select(this).style("fill", "steelblue");
+      }).attr("width", 0).transition().duration(800).attr("width", function (d) {
+        return d.APP * 30 + "px";
+      });
     }
   }, {
     key: 'update',
-    value: function update(props) {}
+    value: function update(props) {
+      console.log(props.natApps);
+      function drawVis(datasetVis, height) {
+        // console.log(datasetVis)
+        x.domain([0, d3.max(datasetVis, function (d) {
+          return d.APP;
+        })]);
+        y.domain(datasetVis.map(function (d) {
+          return d.TEAMS;
+        }));
+
+        var container = d3.select('div.visContainer').append('svg');
+        container.attr('viewBox', '0 0 ' + size * 2 + ' ' + size * 5).style('width', '140%').style('height', '100%');
+
+        container.append("g").attr('transform', 'translate(' + [150] + ')').style("font-size", "15px").call(d3.axisLeft(y));
+
+        var div = d3.select("body").append("div").attr("class", "tooltip").attr("x", 20).style("opacity", 0);
+
+        var bars = container.selectAll("rect").data(datasetVis).enter().append("rect").attr("height", height).attr('transform', 'translate(' + [150] + ')').attr("y", function (d) {
+          return y(d.TEAMS);
+        }).attr("class", "rect").style("fill", "steelblue")
+        // .on("mouseover", function (d) {
+        //   div.html("hi")
+        //     .style("left", (d3.event.pageX + 25) + "px")
+        //     .style("top", (d3.event.pageY - 28) + "px");
+        // })
+        .on("mouseover", function (d) {
+          d3.select(this).style("fill", "brown");
+        }).on("mouseout", function (d) {
+          d3.select(this).style("fill", "steelblue");
+        }).attr("width", 0).transition().duration(800).attr("width", function (d) {
+          return d.APP * 30 + "px";
+        });
+      }
+
+      if (props.state === 'sweet') {
+        var sweet16 = props.sweet.sort(function (x, y) {
+          return [d3.ascending(x.App, y.App)];
+        });
+        var bars = d3.selectAll("svg").remove().exit();
+        drawVis(props.sweet, 10);
+      } else if (props.state === 'elite') {
+        var elite8 = props.elite.sort(function (x, y) {
+          return d3.ascending(x.App, y.App);
+        });
+        var bars = d3.selectAll("svg").remove().exit();
+
+        drawVis(props.elite, 20);
+      } else if (props.state === 'final') {
+        var final4 = props.final.sort(function (x, y) {
+          return d3.ascending(x.App, y.App);
+        });
+        var bars = d3.selectAll("svg").remove().exit();
+
+        drawVis(props.final, 35);
+      } else if (props.state === 'natApps') {
+        var natapp = props.natApps.sort(function (x, y) {
+          return d3.ascending(x.App, y.App);
+        });
+        var bars = d3.selectAll("svg").remove().exit();
+
+        drawVis(props.natApps, 55);
+      } else if (props.state === 'natWins') {
+        var natwin = props.natWins.sort(function (x, y) {
+          return d3.ascending(x.App, y.App);
+        });
+
+        var bars = d3.selectAll("svg").remove().exit();
+        drawVis(props.natWins, 100);
+      }
+    }
   }]);
 
   return TeamHistory;
@@ -116117,7 +116345,7 @@ ReactDOM[mountMethod](React.createElement(IdyllDocument, { ast: ast, components:
 },{"__IDYLL_AST__":"__IDYLL_AST__","__IDYLL_COMPONENTS__":"__IDYLL_COMPONENTS__","__IDYLL_DATA__":"__IDYLL_DATA__","__IDYLL_OPTS__":"__IDYLL_OPTS__","__IDYLL_SYNTAX_HIGHLIGHT__":"__IDYLL_SYNTAX_HIGHLIGHT__","idyll-document":"/usr/local/lib/node_modules/idyll/node_modules/idyll-document/dist/cjs/index.js","react":"/usr/local/lib/node_modules/idyll/node_modules/react/index.js","react-dom":"/usr/local/lib/node_modules/idyll/node_modules/react-dom/index.js"}],"__IDYLL_AST__":[function(require,module,exports){
 "use strict";
 
-module.exports = [["Header", [["title", ["value", "Understanding March Madness"]], ["subtitle", ["value", "A visual exploration of what your chances are of creating a perfect March Madness backet for the NCAA Tournament."]], ["author", ["value", "Michelle Ho, Jon Alkan, and Austin Hutchinson"]]], []], ["waypoint", [], [["aside", [], []], ["h2", [], ["Overview of March Madness"]], ["p", [], ["Every year, college basketball teams compete to be one of the 64 teams that are invited to play for the NCAA National Championship in the March Madness tournament. As the largest \nNCAA basketball tournament, millions of fans flock to colleges around the nation to watch their favorite teams compete for the coveted title of National Champions. With such \ncompetition and chance as the tournament provides, gambling has become a large aspect of the tournament for fans. Every year, millions of fans place bets across all aspects of the \ntournament, the largest being the overall winner of the tournament. In order to get there, fans have developed a bracket gambling system. For each game in the tournament, fans can \nselect which team they believe will win until they select a National Champion. "]], ["p", [], ["With so many games, the payout is large and very hard to achieve with accuracy. But exactly how hard is it to correctly pick every winner in the tournament? It is so hard that it \nhas never been done. There has never been a perfect bracket."]]]], ["waypoint", [], [["h2", [], ["General Terminology"]], ["p", [], ["The March Madness NCAA Tournament consists of two tournaments, one for men and one for women. There are a total of 68 mens teams and 64 womens teams in their respective tournaments. \nFor each tournament, the first 32 teams are selected based on their season records and divisional tournaments. The rest of the teams are selected by a commitee based off season \nperformance, difficulty of schedule, and prior tournament outcomes. This selection commitee meets on the Sunday before the tournament begins, called Selection Sunday. The commitee \nalso assigns each team a ranking (seed) and lays out the brackets for the tournament. "]], ["p", [], ["The bracket is divided into 4 main sections denoting their geographical areas. The men’s tournament starts with the two lowest seeded teams in each division playing to take the last \nseed in each division. After this, the 64 remaining teams play in “The Round of 64”. After this, the winning teams play in “The Round of 32″. The winning teams then proceed to “The \nSweet Sixteen”, then “The Elite 8″, next “The Final Four”, and finally “The National Championship” game."]]]], ["aside", [], [["data", [["name", ["value", "elite"]], ["source", ["value", "elite8.csv"]]], []], ["TeamHistory", [["data", ["variable", "elite"]]], []]]], ["h2", [], ["Jon’s Section to Fill In"]], ["p", [], ["Jon’s section to fill in", ["var", [["name", ["value", "radioVal"]], ["value", ["value", "Sweet16"]]], []], ["Radio", [["value", ["variable", "radioVal"]], ["options", ["expression", "[\"Sweet16\", \"Elite8\", \"Final4\", \"NatApp\", \"NatWins\"]"]]], []]]], ["waypoint", [], [["h2", [], ["Bracket Madness"]], ["p", [], ["Every year 68 teams enter the March Madness Bracket...Your odds of getting a perfect bracket? Try ", ["strong", [], ["1 in 9,223,372,036,854,775,808 or 1 in 9.2 quintillion."]], " (This excludes the first \nfour games as a 16 seed has never beaten a 1 seed.) To put this into perspective, you have a better chance of:"]], ["ul", [], [["li", [], ["Winning an Academy Award (", "1", " in ~", "1", "1", ",", "5", "0", "0", ")"]], ["li", [], ["Getting Struck by Lightning (", "1", " in ~", "7", "0", "0", ",", "0", "0", "0", ")"]], ["li", [], ["Becoming President (", "1", " in ~", "1", "0", ",", "0", "0", "0", ",", "0", "0", "0", ")"]], ["li", [], ["Winning the Lottery (", "1", " in ~", "1", "7", "5", ",", "2", "2", "3", ",", "5", "1", "0", ")"]]]]]], ["waypoint", [], [["aside", [], [["p", [], [["CustomD3Component", [["state", ["variable", "selectVal"]]], []], ["var", [["name", ["value", "selectVal"]], ["value", ["value", "2"]]], []], "\nNumber of Teams: ", ["Select", [["value", ["variable", "selectVal"]], ["options", ["expression", "[\"2\", \"4\"]"]]], []]]]]], ["h2", [], ["Where does ", "1", " in ", "9", ".", "2", " quintillion come from?"]], ["p", [], ["To understand where these odds come from, it’s important to understand probability. ", ["link", [["text", ["value", "Probability"]], ["href", ["value", "https://en.wikipedia.org/wiki/Probability"]]], []], " is the extent\nto which something is probable, or in simpler terms, the likelihood of something happening or being the case."]], ["p", [], ["Let’s start small scale.\nLet’s assume we have 2 teams, and 1 game being played. If there are two teams, assuming teams are equal in skill and all other things held constant, each team will have a 50% chance \nor 1/2 probability of winning the match."]], ["p", [], ["If we have 4 teams, with 3 games being played, assuming teams are equal in skill and all other things held constant, each team will have a 1/8 probability of winning."]]]], ["waypoint", [], [["aside", [], []], ["h2", [], ["Where do these numbers come from?"]], ["p", [], ["The probabilities above assume that all teams in the tournament are equal and thus have an equal probability of winning a match. That is, with this reasoning, we assume that Duke University\nand Washington State University are equal matches (when they are very much not). For the purpose of understanding probability, we will hold this assumption."]], ["p", [], ["We can use the equation to understand this further:", ["Equation", [], ["\n  f(n) = (1/2)^n"]], "\nThe probability of getting a perfect bracket is dependent on n, the number of teams there are in the bracket. "]]]], ["waypoint", [], [["h2", [], ["What are the odds based off ranking?"]], ["p", [], [["aside", [], [["data", [["name", ["value", "simpleodds"]], ["source", ["value", "simpleOddsJSON.json"]]], []], ["var", [["name", ["value", "seedSelect"]], ["value", ["value", 1]]], []], ["p", [], ["Selected Team Seed: ", ["Display", [["value", ["variable", "seedSelect"]]], []], ["IdyllVegaLite", [["data", ["expression", "simpleodds.slice(seedSelect-1, seedSelect)"]], ["spec", ["expression", "{\n     width: 500,\n     height: 100,\n       \"layer\": [{\n            \"mark\": \"bar\",\n            \"encoding\": {\n                x: {\n                      field: \"p_win\",\n                      type: \"quantitative\",\n                      axis: {title: \"Chance of Winning (Percent)\"},\n                      stack: \"normalize\",\n                      scale: { domain: [0, 100] }\n                },\n           }\n        }, {\n           \"mark\": {\n            \"type\": \"text\",\n            \"align\": \"left\",\n            \"baseline\": \"middle\",\n            \"dx\": 3\n        },\n        \"encoding\": {\n            x: {\n                   field: \"p_win\",\n                   type: \"quantitative\",\n                   axis: {title: \"Chance of Winning (Percent)\"},\n                   stack: \"normalize\",\n                   scale: { domain: [0, 100] }\n            },\n            \"text\": {\"field\": \"p_win\", \"type\": \"quantitative\"},\n          }\n        }]\n}"]]], []]]]]], "\nWe can make this more realistic. If we neglect the assumption that all teams are equal, we can start to understand how teams will actually fare in the tournament to make a better prediction\nof who will win."]], ["p", [], ["In the tournament, each team is given a ranking that depends on their play throughout the year leading up to the tournament. Within each of the four divions, teams are ranked 1 through 16 and\n from these numbers their first games are decided. The games are decided so that, initially, the #1 ranked (seeded) team plays the #16 seed team, the #2 seed plays #15, #3 seed plays #14 seed,\n  and so on. Historically, these teams have a set percentage of winning the first round based off these ranks. The visualization to the right shows the likelihood of each team winning their \n  first game based off their rank."]], ["p", [], ["Select Team Seed: 1", ["Range", [["value", ["variable", "seedSelect"]], ["min", ["value", 1]], ["max", ["value", 16]]], []], "16"]]]]];
+module.exports = [["Header", [["title", ["value", "Understanding March Madness"]], ["subtitle", ["value", "A visual exploration of what your chances are of creating a perfect March Madness backet for the NCAA Tournament."]], ["author", ["value", "Michelle Ho, Jon Alkan, and Austin Hutchinson"]]], []], ["waypoint", [], [["aside", [], [["data", [["name", ["value", "brackets"]], ["source", ["value", "brackets.json"]]], []], ["Brackets", [["data", ["variable", "brackets"]]], []]]], ["h2", [], ["Overview of March Madness"]], ["p", [], ["Every year, college basketball teams compete to be one of the 64 teams that are invited to play for the NCAA National Championship in the March Madness tournament. As the largest \nNCAA basketball tournament, millions of fans flock to colleges around the nation to watch their favorite teams compete for the coveted title of National Champions. With such \ncompetition and chance as the tournament provides, gambling has become a large aspect of the tournament for fans. Every year, millions of fans place bets across all aspects of the \ntournament, the largest being the overall winner of the tournament. In order to get there, fans have developed a bracket gambling system. For each game in the tournament, fans can \nselect which team they believe will win until they select a National Champion. "]], ["p", [], ["With so many games, the payout is large and very hard to achieve with accuracy. But exactly how hard is it to correctly pick every winner in the tournament? It is so hard that it \nhas never been done. There has never been a perfect bracket."]]]], ["waypoint", [], [["h2", [], ["General Terminology"]], ["p", [], ["The March Madness NCAA Tournament consists of two tournaments, one for men and one for women. There are a total of 68 mens teams and 64 womens teams in their respective tournaments. \nFor each tournament, the first 32 teams are selected based on their season records and divisional tournaments. The rest of the teams are selected by a commitee based off season \nperformance, difficulty of schedule, and prior tournament outcomes. This selection commitee meets on the Sunday before the tournament begins, called Selection Sunday. The commitee \nalso assigns each team a ranking (seed) and lays out the brackets for the tournament. "]], ["p", [], ["The bracket is divided into 4 main sections denoting their geographical areas. The men’s tournament starts with the two lowest seeded teams in each division playing to take the last \nseed in each division. After this, the 64 remaining teams play in “The Round of 64”. After this, the winning teams play in “The Round of 32″. The winning teams then proceed to “The \nSweet Sixteen”, then “The Elite 8″, next “The Final Four”, and finally “The National Championship” game."]]]], ["waypoint", [], [["h2", [], ["Bracket Madness"]], ["p", [], ["Every year 68 teams enter the March Madness Bracket...Your odds of getting a perfect bracket? Try ", ["strong", [], ["1 in 9,223,372,036,854,775,808 or 1 in 9.2 quintillion."]], " (This excludes the first \nfour games as a 16 seed has never beaten a 1 seed.) To put this into perspective, you have a better chance of:"]], ["ul", [], [["li", [], ["Winning an Academy Award (", "1", " in ~", "1", "1", ",", "5", "0", "0", ")"]], ["li", [], ["Getting Struck by Lightning (", "1", " in ~", "7", "0", "0", ",", "0", "0", "0", ")"]], ["li", [], ["Becoming President (", "1", " in ~", "1", "0", ",", "0", "0", "0", ",", "0", "0", "0", ")"]], ["li", [], ["Winning the Lottery (", "1", " in ~", "1", "7", "5", ",", "2", "2", "3", ",", "5", "1", "0", ")"]]]]]], ["waypoint", [], [["aside", [], [["p", [], [["CustomD3Component", [["state", ["variable", "selectVal"]]], []], ["var", [["name", ["value", "selectVal"]], ["value", ["value", "2"]]], []], "\nNumber of Teams: ", ["Select", [["value", ["variable", "selectVal"]], ["options", ["expression", "[\"2\", \"4\"]"]]], []]]]]], ["h2", [], ["Where does ", "1", " in ", "9", ".", "2", " quintillion come from?"]], ["p", [], ["To understand where these odds come from, it’s important to understand probability. ", ["link", [["text", ["value", "Probability"]], ["href", ["value", "https://en.wikipedia.org/wiki/Probability"]]], []], " is the extent\nto which something is probable, or in simpler terms, the likelihood of something happening or being the case."]], ["p", [], ["Let’s start small scale.\nLet’s assume we have 2 teams, and 1 game being played. If there are two teams, assuming teams are equal in skill and all other things held constant, each team will have a 50% chance \nor 1/2 probability of winning the match."]], ["p", [], ["If we have 4 teams, with 3 games being played, assuming teams are equal in skill and all other things held constant, each team will have a 1/8 probability of winning."]]]], ["waypoint", [], [["aside", [], []], ["h2", [], ["Where do these numbers come from?"]], ["p", [], ["The probabilities above assume that all teams in the tournament are equal and thus have an equal probability of winning a match. That is, with this reasoning, we assume that Duke University\nand Washington State University are equal matches (when they are very much not). For the purpose of understanding probability, we will hold this assumption."]], ["p", [], ["We can use the equation to understand this further:", ["Equation", [], ["\n  f(n) = (1/2)^n"]], "\nThe probability of getting a perfect bracket is dependent on n, the number of teams there are in the bracket. "]]]], ["waypoint", [], [["h2", [], ["What are the odds based off ranking?"]], ["p", [], [["aside", [], [["data", [["name", ["value", "simpleodds"]], ["source", ["value", "simpleOddsJSON.json"]]], []], ["var", [["name", ["value", "seedSelect"]], ["value", ["value", 1]]], []], ["p", [], ["Selected Team Seed: ", ["Display", [["value", ["variable", "seedSelect"]]], []], ["IdyllVegaLite", [["data", ["expression", "simpleodds.slice(seedSelect-1, seedSelect)"]], ["spec", ["expression", "{\n     width: 500,\n     height: 100,\n       \"layer\": [{\n            \"mark\": \"bar\",\n            \"encoding\": {\n                x: {\n                      field: \"p_win\",\n                      type: \"quantitative\",\n                      axis: {title: \"Chance of Winning (Percent)\"},\n                      stack: \"normalize\",\n                      scale: { domain: [0, 100] }\n                },\n           }\n        }, {\n           \"mark\": {\n            \"type\": \"text\",\n            \"align\": \"left\",\n            \"baseline\": \"middle\",\n            \"dx\": 3\n        },\n        \"encoding\": {\n            x: {\n                   field: \"p_win\",\n                   type: \"quantitative\",\n                   axis: {title: \"Chance of Winning (Percent)\"},\n                   stack: \"normalize\",\n                   scale: { domain: [0, 100] }\n            },\n            \"text\": {\"field\": \"p_win\", \"type\": \"quantitative\"},\n          }\n        }]\n}"]]], []]]]]], "\nWe can make this more realistic. If we neglect the assumption that all teams are equal, we can start to understand how teams will actually fare in the tournament to make a better prediction \nof who will win."]], ["p", [], ["In the tournament, each team is given a ranking that depends on their play throughout the year leading up to the tournament. Within each of the four divisions, teams are ranked 1 through 16 \nand from these numbers their first games are decided. The games are decided so that, initially, the #1 ranked (seeded) team plays the #16 seed team, the #2 seed plays #15, #3 seed plays #14 \nseed, and so on. Historically, these teams have a set percentage of winning the first round based off these ranks. The visualization to the right shows the likelihood of each team winning \ntheir first game based off their rank."]], ["p", [], ["Select Team Seed: 1", ["Range", [["value", ["variable", "seedSelect"]], ["min", ["value", 1]], ["max", ["value", 16]]], []], "16"]]]], ["waypoint", [], [["h2", [], ["Jon’s Section to Fill In"]], ["p", [], ["As we begin to further understand how data can help narrow the odds of getting a perfect bracket, understanding how teams have performed in the past is a big indicator of how they might \nperform in the future."]], ["p", [], ["The NCAA started recording where teams got in the tournament dating back to 1985. The visualization to the right highlights the teams that have made it to each major point in the tournament. \nThe Sweet 16 is comprised of the 16 teams remaining in the tournament, 4 from each division, the Elite 8 is comprised of 8 and so on. As the visualization shows, only 17 different teams have won\n the tournament and knowing this gives us a better probability of knowing which teams will win the tournament. Furthermore, being able to spot trends can greatly increase the odds if a better \n bracket, for example if a team generally makes it to the Sweet 16 but then crumbles under the pressure you can comfortably guess how far they might make it again this year."]], ["data", [["name", ["value", "final"]], ["source", ["value", "final4.json"]]], []], ["data", [["name", ["value", "elite"]], ["source", ["value", "elite8.json"]]], []], ["data", [["name", ["value", "sweet"]], ["source", ["value", "sweet16.json"]]], []], ["data", [["name", ["value", "natWins"]], ["source", ["value", "natWins.json"]]], []], ["data", [["name", ["value", "natApps"]], ["source", ["value", "natApp.json"]]], []], ["var", [["name", ["value", "radioVal"]], ["value", ["value", "final"]]], []], ["Radio", [["value", ["variable", "radioVal"]], ["options", ["expression", "[{ value:\"final\", label: \"Final 4     \" }, { value:\"elite\", label: \"Elite 8     \" }, { value: \"sweet\", label: \"Sweet 16     \" }, { value: \"natWins\", label: \"National Wins     \" }, { value: \"natApps\", label: \"National Appearances\" }]"]]], []], ["TeamHistory", [["state", ["variable", "radioVal"]], ["final", ["variable", "final"]], ["elite", ["variable", "elite"]], ["sweet", ["variable", "sweet"]], ["natWins", ["variable", "natWins"]], ["natApps", ["variable", "natApps"]]], []]]]];
 
 },{}],"__IDYLL_COMPONENTS__":[function(require,module,exports){
 'use strict';
@@ -116126,21 +116354,22 @@ module.exports = {
 	'header': require('/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/header.js'),
 	'waypoint': require('/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/waypoint.js'),
 	'aside': require('/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/aside.js'),
-	'team-history': require('/Users/Michelle/Documents/INFO474/march-madness-vis/March-Madness-Viz/components/team-history.js'),
-	'radio': require('/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/radio.js'),
+	'brackets': require('/Users/Michelle/Documents/INFO474/march-madness-vis/March-Madness-Viz/components/brackets.js'),
 	'custom-d3-component': require('/Users/Michelle/Documents/INFO474/march-madness-vis/March-Madness-Viz/components/custom-d3-component.js'),
 	'select': require('/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/select.js'),
 	'link': require('/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/link.js'),
 	'equation': require('/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/equation.js'),
 	'display': require('/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/display.js'),
 	'idyll-vega-lite': require('/Users/Michelle/node_modules/idyll-vega-lite/lib.js'),
-	'range': require('/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/range.js')
+	'range': require('/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/range.js'),
+	'radio': require('/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/radio.js'),
+	'team-history': require('/Users/Michelle/Documents/INFO474/march-madness-vis/March-Madness-Viz/components/team-history.js')
 };
 
-},{"/Users/Michelle/Documents/INFO474/march-madness-vis/March-Madness-Viz/components/custom-d3-component.js":"/Users/Michelle/Documents/INFO474/march-madness-vis/March-Madness-Viz/components/custom-d3-component.js","/Users/Michelle/Documents/INFO474/march-madness-vis/March-Madness-Viz/components/team-history.js":"/Users/Michelle/Documents/INFO474/march-madness-vis/March-Madness-Viz/components/team-history.js","/Users/Michelle/node_modules/idyll-vega-lite/lib.js":"/Users/Michelle/node_modules/idyll-vega-lite/lib.js","/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/aside.js":"/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/aside.js","/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/display.js":"/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/display.js","/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/equation.js":"/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/equation.js","/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/header.js":"/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/header.js","/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/link.js":"/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/link.js","/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/radio.js":"/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/radio.js","/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/range.js":"/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/range.js","/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/select.js":"/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/select.js","/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/waypoint.js":"/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/waypoint.js"}],"__IDYLL_DATA__":[function(require,module,exports){
+},{"/Users/Michelle/Documents/INFO474/march-madness-vis/March-Madness-Viz/components/brackets.js":"/Users/Michelle/Documents/INFO474/march-madness-vis/March-Madness-Viz/components/brackets.js","/Users/Michelle/Documents/INFO474/march-madness-vis/March-Madness-Viz/components/custom-d3-component.js":"/Users/Michelle/Documents/INFO474/march-madness-vis/March-Madness-Viz/components/custom-d3-component.js","/Users/Michelle/Documents/INFO474/march-madness-vis/March-Madness-Viz/components/team-history.js":"/Users/Michelle/Documents/INFO474/march-madness-vis/March-Madness-Viz/components/team-history.js","/Users/Michelle/node_modules/idyll-vega-lite/lib.js":"/Users/Michelle/node_modules/idyll-vega-lite/lib.js","/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/aside.js":"/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/aside.js","/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/display.js":"/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/display.js","/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/equation.js":"/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/equation.js","/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/header.js":"/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/header.js","/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/link.js":"/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/link.js","/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/radio.js":"/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/radio.js","/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/range.js":"/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/range.js","/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/select.js":"/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/select.js","/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/waypoint.js":"/usr/local/lib/node_modules/idyll/node_modules/idyll-components/dist/cjs/waypoint.js"}],"__IDYLL_DATA__":[function(require,module,exports){
 "use strict";
 
-module.exports = { "elite": [], "simpleodds": [{ "seed": 1, "p_win": 100 }, { "seed": 2, "p_win": 96 }, { "seed": 3, "p_win": 85 }, { "seed": 4, "p_win": 79 }, { "seed": 5, "p_win": 67 }, { "seed": 6, "p_win": 67 }, { "seed": 7, "p_win": 60 }, { "seed": 8, "p_win": 47 }, { "seed": 9, "p_win": 53 }, { "seed": 10, "p_win": 40 }, { "seed": 11, "p_win": 33 }, { "seed": 12, "p_win": 33 }, { "seed": 13, "p_win": 21 }, { "seed": 14, "p_win": 15 }, { "seed": 15, "p_win": 4 }, { "seed": 16, "p_win": 0 }] };
+module.exports = { "brackets": { "name": "Overall Winner", "winners": [{ "name": "Winner Left 1", "winners": [{ "name": "Winner Left 3" }, { "name": "Winner Left 4" }] }, { "name": "Winner Left 2" }], "challengers": [{ "name": "Challenger Right 1", "challengers": [{ "name": "Challenger Right 3" }, { "name": "Challenger Right 4" }] }, { "name": "Challenger Right 2", "challengers": [{ "name": "Challenger Right 5" }, { "name": "Challenger Right 6" }] }] }, "simpleodds": [{ "seed": 1, "p_win": 100 }, { "seed": 2, "p_win": 96 }, { "seed": 3, "p_win": 85 }, { "seed": 4, "p_win": 79 }, { "seed": 5, "p_win": 67 }, { "seed": 6, "p_win": 67 }, { "seed": 7, "p_win": 60 }, { "seed": 8, "p_win": 47 }, { "seed": 9, "p_win": 53 }, { "seed": 10, "p_win": 40 }, { "seed": 11, "p_win": 33 }, { "seed": 12, "p_win": 33 }, { "seed": 13, "p_win": 21 }, { "seed": 14, "p_win": 15 }, { "seed": 15, "p_win": 4 }, { "seed": 16, "p_win": 0 }], "final": [{ "TEAMS": "Arizona", "APP": 4 }, { "TEAMS": "Arkansas", "APP": 3 }, { "TEAMS": "Butler", "APP": 2 }, { "TEAMS": "Cincinnati", "APP": 1 }, { "TEAMS": "Connecticut", "APP": 5 }, { "TEAMS": "Duke", "APP": 12 }, { "TEAMS": "Florida", "APP": 5 }, { "TEAMS": "George Mason", "APP": 1 }, { "TEAMS": "Georgetown", "APP": 2 }, { "TEAMS": "Georgia Tech", "APP": 2 }, { "TEAMS": "Gonzaga", "APP": 1 }, { "TEAMS": "Illinois", "APP": 2 }, { "TEAMS": "Indiana", "APP": 3 }, { "TEAMS": "Kansas", "APP": 8 }, { "TEAMS": "Kentucky", "APP": 8 }, { "TEAMS": "Louisville", "APP": 4 }, { "TEAMS": "LSU", "APP": 2 }, { "TEAMS": "Marquette", "APP": 1 }, { "TEAMS": "Maryland", "APP": 2 }, { "TEAMS": "Massachusetts", "APP": 1 }, { "TEAMS": "Memphis", "APP": 2 }, { "TEAMS": "Michigan", "APP": 3 }, { "TEAMS": "Michigan State", "APP": 7 }, { "TEAMS": "Minnesota", "APP": 1 }, { "TEAMS": "Mississippi State", "APP": 1 }, { "TEAMS": "North Carolina", "APP": 11 }, { "TEAMS": "Ohio State", "APP": 3 }, { "TEAMS": "Oklahoma", "APP": 3 }, { "TEAMS": "Oklahoma State", "APP": 2 }, { "TEAMS": "Oregon", "APP": 1 }, { "TEAMS": "Providence", "APP": 1 }, { "TEAMS": "Seton Hall", "APP": 1 }, { "TEAMS": "South Carolina", "APP": 1 }, { "TEAMS": "St. John's", "APP": 1 }, { "TEAMS": "Stanford", "APP": 1 }, { "TEAMS": "Syracuse", "APP": 5 }, { "TEAMS": "Texas", "APP": 1 }, { "TEAMS": "UCLA", "APP": 4 }, { "TEAMS": "UNLV", "APP": 3 }, { "TEAMS": "Utah", "APP": 1 }, { "TEAMS": "Villanova", "APP": 3 }, { "TEAMS": "Virginia Commonwealth", "APP": 1 }, { "TEAMS": "West Virginia", "APP": 1 }, { "TEAMS": "Wichita State", "APP": 1 }, { "TEAMS": "Wisconsin", "APP": 3 }], "elite": [{ "TEAMS": "Alabama", "APP": 1 }, { "TEAMS": "Arizona", "APP": 10 }, { "TEAMS": "Arkansas", "APP": 4 }, { "TEAMS": "Auburn", "APP": 1 }, { "TEAMS": "Baylor", "APP": 2 }, { "TEAMS": "Boston College", "APP": 1 }, { "TEAMS": "Butler", "APP": 2 }, { "TEAMS": "Cincinnati", "APP": 3 }, { "TEAMS": "Connecticut", "APP": 10 }, { "TEAMS": "Davidson", "APP": 1 }, { "TEAMS": "Dayton", "APP": 1 }, { "TEAMS": "Duke", "APP": 14 }, { "TEAMS": "Florida", "APP": 9 }, { "TEAMS": "Florida State", "APP": 1 }, { "TEAMS": "George Mason", "APP": 1 }, { "TEAMS": "Georgetown", "APP": 5 }, { "TEAMS": "Georgia Tech", "APP": 3 }, { "TEAMS": "Gonzaga", "APP": 3 }, { "TEAMS": "Illinois", "APP": 3 }, { "TEAMS": "Indiana", "APP": 4 }, { "TEAMS": "Iowa", "APP": 1 }, { "TEAMS": "Iowa State", "APP": 1 }, { "TEAMS": "Kansas", "APP": 14 }, { "TEAMS": "Kansas State", "APP": 2 }, { "TEAMS": "Kent State", "APP": 1 }, { "TEAMS": "Kentucky", "APP": 16 }, { "TEAMS": "Louisville", "APP": 8 }, { "TEAMS": "Loyola Marymount", "APP": 1 }, { "TEAMS": "LSU", "APP": 3 }, { "TEAMS": "Marquette", "APP": 2 }, { "TEAMS": "Maryland", "APP": 2 }, { "TEAMS": "Massachusetts", "APP": 2 }, { "TEAMS": "Memphis", "APP": 5 }, { "TEAMS": "Michigan", "APP": 6 }, { "TEAMS": "Michigan State", "APP": 9 }, { "TEAMS": "Minnesota", "APP": 2 }, { "TEAMS": "Mississippi State", "APP": 1 }, { "TEAMS": "Missouri", "APP": 3 }, { "TEAMS": "Navy", "APP": 1 }, { "TEAMS": "North Carolina", "APP": 17 }, { "TEAMS": "North Carolina State", "APP": 2 }, { "TEAMS": "Notre Dame", "APP": 2 }, { "TEAMS": "Ohio State", "APP": 5 }, { "TEAMS": "Oklahoma", "APP": 6 }, { "TEAMS": "Oklahoma State", "APP": 3 }, { "TEAMS": "Oregon", "APP": 4 }, { "TEAMS": "Pittsburgh", "APP": 1 }, { "TEAMS": "Providence", "APP": 2 }, { "TEAMS": "Purdue", "APP": 2 }, { "TEAMS": "Rhode Island", "APP": 1 }, { "TEAMS": "Seton Hall", "APP": 2 }, { "TEAMS": "South Carolina", "APP": 1 }, { "TEAMS": "Southern California", "APP": 1 }, { "TEAMS": "St. John's", "APP": 3 }, { "TEAMS": "St. Joseph's", "APP": 1 }, { "TEAMS": "Stanford", "APP": 2 }, { "TEAMS": "Syracuse", "APP": 7 }, { "TEAMS": "Temple", "APP": 5 }, { "TEAMS": "Tennessee", "APP": 1 }, { "TEAMS": "Texas", "APP": 4 }, { "TEAMS": "Tulsa", "APP": 1 }, { "TEAMS": "UCLA", "APP": 10 }, { "TEAMS": "Utah", "APP": 2 }, { "TEAMS": "Villanova", "APP": 5 }, { "TEAMS": "Virginia", "APP": 3 }, { "TEAMS": "Virginia", "APP": 2 }, { "TEAMS": "Virginia Commonwealth", "APP": 1 }, { "TEAMS": "Wake Forest", "APP": 1 }, { "TEAMS": "West Virginia", "APP": 2 }, { "TEAMS": "Wichita State", "APP": 1 }, { "TEAMS": "Wisconsin", "APP": 4 }, { "TEAMS": "Xavier", "APP": 3 }], "sweet": [{ "TEAMS": "Alabama", "APP": 6 }, { "TEAMS": "Alabama-Birmingham", "APP": 1 }, { "TEAMS": "Arizona", "APP": 17 }, { "TEAMS": "Arizona State", "APP": 1 }, { "TEAMS": "Arkansas", "APP": 6 }, { "TEAMS": "Auburn", "APP": 4 }, { "TEAMS": "Ball State", "APP": 1 }, { "TEAMS": "Baylor", "APP": 4 }, { "TEAMS": "Boston College", "APP": 3 }, { "TEAMS": "Bradley", "APP": 1 }, { "TEAMS": "Brigham Young", "APP": 1 }, { "TEAMS": "Butler", "APP": 5 }, { "TEAMS": "California", "APP": 2 }, { "TEAMS": "Chattanooga", "APP": 1 }, { "TEAMS": "Cincinnati", "APP": 5 }, { "TEAMS": "Clemson", "APP": 2 }, { "TEAMS": "Cleveland State", "APP": 1 }, { "TEAMS": "Connecticut", "APP": 14 }, { "TEAMS": "Cornell", "APP": 1 }, { "TEAMS": "Davidson", "APP": 1 }, { "TEAMS": "Dayton", "APP": 1 }, { "TEAMS": "DePaul", "APP": 2 }, { "TEAMS": "Duke", "APP": 23 }, { "TEAMS": "Eastern Michigan", "APP": 1 }, { "TEAMS": "Florida", "APP": 11 }, { "TEAMS": "Florida Gulf Coast", "APP": 1 }, { "TEAMS": "Florida State", "APP": 2 }, { "TEAMS": "George Mason", "APP": 1 }, { "TEAMS": "George Washington", "APP": 1 }, { "TEAMS": "Georgetown", "APP": 8 }, { "TEAMS": "Georgia", "APP": 1 }, { "TEAMS": "Georgia Tech", "APP": 6 }, { "TEAMS": "Gonzaga", "APP": 8 }, { "TEAMS": "Illinois", "APP": 6 }, { "TEAMS": "Indiana", "APP": 10 }, { "TEAMS": "Iowa", "APP": 3 }, { "TEAMS": "Iowa State", "APP": 5 }, { "TEAMS": "Kansas", "APP": 21 }, { "TEAMS": "Kansas State", "APP": 2 }, { "TEAMS": "Kent State", "APP": 1 }, { "TEAMS": "Kentucky", "APP": 20 }, { "TEAMS": "La Salle", "APP": 1 }, { "TEAMS": "Louisiana Tech", "APP": 1 }, { "TEAMS": "Louisville", "APP": 14 }, { "TEAMS": "Loyola (Ill.)", "APP": 1 }, { "TEAMS": "Loyola Marymount", "APP": 1 }, { "TEAMS": "LSU", "APP": 4 }, { "TEAMS": "Marquette", "APP": 5 }, { "TEAMS": "Maryland", "APP": 9 }, { "TEAMS": "Massachusetts", "APP": 3 }, { "TEAMS": "Memphis", "APP": 7 }, { "TEAMS": "Miami (Fla.)", "APP": 3 }, { "TEAMS": "Miami (Ohio)", "APP": 1 }, { "TEAMS": "Michigan", "APP": 8 }, { "TEAMS": "Michigan State", "APP": 15 }, { "TEAMS": "Milwaukee", "APP": 1 }, { "TEAMS": "Minnesota", "APP": 3 }, { "TEAMS": "Mississippi", "APP": 1 }, { "TEAMS": "Mississippi State", "APP": 2 }, { "TEAMS": "Missouri", "APP": 4 }, { "TEAMS": "Missouri State", "APP": 1 }, { "TEAMS": "Navy", "APP": 1 }, { "TEAMS": "Nevada", "APP": 1 }, { "TEAMS": "New Mexico State", "APP": 1 }, { "TEAMS": "North Carolina", "APP": 22 }, { "TEAMS": "North Carolina State", "APP": 6 }, { "TEAMS": "Northern Iowa", "APP": 1 }, { "TEAMS": "Notre Dame", "APP": 4 }, { "TEAMS": "Ohio", "APP": 1 }, { "TEAMS": "Ohio State", "APP": 8 }, { "TEAMS": "Oklahoma", "APP": 10 }, { "TEAMS": "Oklahoma State", "APP": 6 }, { "TEAMS": "Oregon", "APP": 5 }, { "TEAMS": "Penn State", "APP": 1 }, { "TEAMS": "Pittsburgh", "APP": 5 }, { "TEAMS": "Providence", "APP": 2 }, { "TEAMS": "Purdue", "APP": 8 }, { "TEAMS": "Rhode Island", "APP": 2 }, { "TEAMS": "Richmond", "APP": 2 }, { "TEAMS": "San Diego State", "APP": 2 }, { "TEAMS": "Seton Hall", "APP": 4 }, { "TEAMS": "South Carolina", "APP": 1 }, { "TEAMS": "Southern California", "APP": 2 }, { "TEAMS": "Southern Illinois", "APP": 2 }, { "TEAMS": "St. John's", "APP": 3 }, { "TEAMS": "St. Joseph's", "APP": 2 }, { "TEAMS": "St. Mary's (Cal.)", "APP": 1 }, { "TEAMS": "Stanford", "APP": 4 }, { "TEAMS": "Syracuse", "APP": 14 }, { "TEAMS": "Temple", "APP": 5 }, { "TEAMS": "Tennessee", "APP": 5 }, { "TEAMS": "Texas", "APP": 7 }, { "TEAMS": "Texas A&M", "APP": 2 }, { "TEAMS": "Texas Tech", "APP": 2 }, { "TEAMS": "Tulsa", "APP": 3 }, { "TEAMS": "UCLA", "APP": 14 }, { "TEAMS": "UNLV", "APP": 6 }, { "TEAMS": "Utah", "APP": 6 }, { "TEAMS": "UTEP", "APP": 1 }, { "TEAMS": "Valparaiso", "APP": 1 }, { "TEAMS": "Vanderbilt", "APP": 4 }, { "TEAMS": "Villanova", "APP": 7 }, { "TEAMS": "Virginia", "APP": 5 }, { "TEAMS": "Virginia Commonwealth", "APP": 1 }, { "TEAMS": "Wake Forest", "APP": 4 }, { "TEAMS": "Washington", "APP": 4 }, { "TEAMS": "Washington State", "APP": 1 }, { "TEAMS": "West Virginia", "APP": 7 }, { "TEAMS": "Western Kentucky", "APP": 2 }, { "TEAMS": "Wichita State", "APP": 3 }, { "TEAMS": "Wisconsin", "APP": 10 }, { "TEAMS": "Wyoming", "APP": 1 }, { "TEAMS": "Xavier", "APP": 8 }], "natWins": [{ "TEAMS": "Arizona", "APP": 1 }, { "TEAMS": "Arkansas", "APP": 1 }, { "TEAMS": "Connecticut", "APP": 4 }, { "TEAMS": "Duke", "APP": 5 }, { "TEAMS": "Florida", "APP": 2 }, { "TEAMS": "Indiana", "APP": 1 }, { "TEAMS": "Kansas", "APP": 2 }, { "TEAMS": "Kentucky", "APP": 3 }, { "TEAMS": "Louisville", "APP": 2 }, { "TEAMS": "Maryland", "APP": 1 }, { "TEAMS": "Michigan", "APP": 1 }, { "TEAMS": "Michigan State", "APP": 1 }, { "TEAMS": "North Carolina", "APP": 4 }, { "TEAMS": "Syracuse", "APP": 1 }, { "TEAMS": "UCLA", "APP": 1 }, { "TEAMS": "UNLV", "APP": 1 }, { "TEAMS": "Villanova", "APP": 2 }], "natApps": [{ "TEAMS": "Arizona", "APP": 2 }, { "TEAMS": "Arkansas", "APP": 2 }, { "TEAMS": "Butler", "APP": 2 }, { "TEAMS": "Connecticut", "APP": 4 }, { "TEAMS": "Duke", "APP": 9 }, { "TEAMS": "Florida", "APP": 3 }, { "TEAMS": "Georgetown", "APP": 1 }, { "TEAMS": "Georgia Tech", "APP": 1 }, { "TEAMS": "Gonzaga", "APP": 1 }, { "TEAMS": "Illinois", "APP": 1 }, { "TEAMS": "Indiana", "APP": 2 }, { "TEAMS": "Kansas", "APP": 5 }, { "TEAMS": "Kentucky", "APP": 5 }, { "TEAMS": "Louisville", "APP": 2 }, { "TEAMS": "Maryland", "APP": 1 }, { "TEAMS": "Memphis", "APP": 1 }, { "TEAMS": "Michigan", "APP": 4 }, { "TEAMS": "Michigan State", "APP": 2 }, { "TEAMS": "North Carolina", "APP": 5 }, { "TEAMS": "Ohio State", "APP": 1 }, { "TEAMS": "Oklahoma", "APP": 1 }, { "TEAMS": "Seton Hall", "APP": 1 }, { "TEAMS": "Syracuse", "APP": 3 }, { "TEAMS": "UCLA", "APP": 2 }, { "TEAMS": "UNLV", "APP": 1 }, { "TEAMS": "Utah", "APP": 1 }, { "TEAMS": "Villanova", "APP": 2 }, { "TEAMS": "Wisconsin", "APP": 1 }] };
 
 },{}],"__IDYLL_OPTS__":[function(require,module,exports){
 "use strict";

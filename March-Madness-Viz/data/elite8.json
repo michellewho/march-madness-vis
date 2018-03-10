@@ -1,0 +1,290 @@
+[
+  {
+    "TEAMS": "Alabama",
+    "APP": 1
+  },
+  {
+    "TEAMS": "Arizona",
+    "APP": 10
+  },
+  {
+    "TEAMS": "Arkansas",
+    "APP": 4
+  },
+  {
+    "TEAMS": "Auburn",
+    "APP": 1
+  },
+  {
+    "TEAMS": "Baylor",
+    "APP": 2
+  },
+  {
+    "TEAMS": "Boston College",
+    "APP": 1
+  },
+  {
+    "TEAMS": "Butler",
+    "APP": 2
+  },
+  {
+    "TEAMS": "Cincinnati",
+    "APP": 3
+  },
+  {
+    "TEAMS": "Connecticut",
+    "APP": 10
+  },
+  {
+    "TEAMS": "Davidson",
+    "APP": 1
+  },
+  {
+    "TEAMS": "Dayton",
+    "APP": 1
+  },
+  {
+    "TEAMS": "Duke",
+    "APP": 14
+  },
+  {
+    "TEAMS": "Florida",
+    "APP": 9
+  },
+  {
+    "TEAMS": "Florida State",
+    "APP": 1
+  },
+  {
+    "TEAMS": "George Mason",
+    "APP": 1
+  },
+  {
+    "TEAMS": "Georgetown",
+    "APP": 5
+  },
+  {
+    "TEAMS": "Georgia Tech",
+    "APP": 3
+  },
+  {
+    "TEAMS": "Gonzaga",
+    "APP": 3
+  },
+  {
+    "TEAMS": "Illinois",
+    "APP": 3
+  },
+  {
+    "TEAMS": "Indiana",
+    "APP": 4
+  },
+  {
+    "TEAMS": "Iowa",
+    "APP": 1
+  },
+  {
+    "TEAMS": "Iowa State",
+    "APP": 1
+  },
+  {
+    "TEAMS": "Kansas",
+    "APP": 14
+  },
+  {
+    "TEAMS": "Kansas State",
+    "APP": 2
+  },
+  {
+    "TEAMS": "Kent State",
+    "APP": 1
+  },
+  {
+    "TEAMS": "Kentucky",
+    "APP": 16
+  },
+  {
+    "TEAMS": "Louisville",
+    "APP": 8
+  },
+  {
+    "TEAMS": "Loyola Marymount",
+    "APP": 1
+  },
+  {
+    "TEAMS": "LSU",
+    "APP": 3
+  },
+  {
+    "TEAMS": "Marquette",
+    "APP": 2
+  },
+  {
+    "TEAMS": "Maryland",
+    "APP": 2
+  },
+  {
+    "TEAMS": "Massachusetts",
+    "APP": 2
+  },
+  {
+    "TEAMS": "Memphis",
+    "APP": 5
+  },
+  {
+    "TEAMS": "Michigan",
+    "APP": 6
+  },
+  {
+    "TEAMS": "Michigan State",
+    "APP": 9
+  },
+  {
+    "TEAMS": "Minnesota",
+    "APP": 2
+  },
+  {
+    "TEAMS": "Mississippi State",
+    "APP": 1
+  },
+  {
+    "TEAMS": "Missouri",
+    "APP": 3
+  },
+  {
+    "TEAMS": "Navy",
+    "APP": 1
+  },
+  {
+    "TEAMS": "North Carolina",
+    "APP": 17
+  },
+  {
+    "TEAMS": "North Carolina State",
+    "APP": 2
+  },
+  {
+    "TEAMS": "Notre Dame",
+    "APP": 2
+  },
+  {
+    "TEAMS": "Ohio State",
+    "APP": 5
+  },
+  {
+    "TEAMS": "Oklahoma",
+    "APP": 6
+  },
+  {
+    "TEAMS": "Oklahoma State",
+    "APP": 3
+  },
+  {
+    "TEAMS": "Oregon",
+    "APP": 4
+  },
+  {
+    "TEAMS": "Pittsburgh",
+    "APP": 1
+  },
+  {
+    "TEAMS": "Providence",
+    "APP": 2
+  },
+  {
+    "TEAMS": "Purdue",
+    "APP": 2
+  },
+  {
+    "TEAMS": "Rhode Island",
+    "APP": 1
+  },
+  {
+    "TEAMS": "Seton Hall",
+    "APP": 2
+  },
+  {
+    "TEAMS": "South Carolina",
+    "APP": 1
+  },
+  {
+    "TEAMS": "Southern California",
+    "APP": 1
+  },
+  {
+    "TEAMS": "St. John's",
+    "APP": 3
+  },
+  {
+    "TEAMS": "St. Joseph's",
+    "APP": 1
+  },
+  {
+    "TEAMS": "Stanford",
+    "APP": 2
+  },
+  {
+    "TEAMS": "Syracuse",
+    "APP": 7
+  },
+  {
+    "TEAMS": "Temple",
+    "APP": 5
+  },
+  {
+    "TEAMS": "Tennessee",
+    "APP": 1
+  },
+  {
+    "TEAMS": "Texas",
+    "APP": 4
+  },
+  {
+    "TEAMS": "Tulsa",
+    "APP": 1
+  },
+  {
+    "TEAMS": "UCLA",
+    "APP": 10
+  },
+  {
+    "TEAMS": "Utah",
+    "APP": 2
+  },
+  {
+    "TEAMS": "Villanova",
+    "APP": 5
+  },
+  {
+    "TEAMS": "Virginia",
+    "APP": 3
+  },
+  {
+    "TEAMS": "Virginia",
+    "APP": 2
+  },
+  {
+    "TEAMS": "Virginia Commonwealth",
+    "APP": 1
+  },
+  {
+    "TEAMS": "Wake Forest",
+    "APP": 1
+  },
+  {
+    "TEAMS": "West Virginia",
+    "APP": 2
+  },
+  {
+    "TEAMS": "Wichita State",
+    "APP": 1
+  },
+  {
+    "TEAMS": "Wisconsin",
+    "APP": 4
+  },
+  {
+    "TEAMS": "Xavier",
+    "APP": 3
+  }
+]

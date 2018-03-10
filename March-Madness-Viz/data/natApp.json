@@ -1,0 +1,114 @@
+[
+  {
+    "TEAMS": "Arizona",
+    "APP": 2
+  },
+  {
+    "TEAMS": "Arkansas",
+    "APP": 2
+  },
+  {
+    "TEAMS": "Butler",
+    "APP": 2
+  },
+  {
+    "TEAMS": "Connecticut",
+    "APP": 4
+  },
+  {
+    "TEAMS": "Duke",
+    "APP": 9
+  },
+  {
+    "TEAMS": "Florida",
+    "APP": 3
+  },
+  {
+    "TEAMS": "Georgetown",
+    "APP": 1
+  },
+  {
+    "TEAMS": "Georgia Tech",
+    "APP": 1
+  },
+  {
+    "TEAMS": "Gonzaga",
+    "APP": 1
+  },
+  {
+    "TEAMS": "Illinois",
+    "APP": 1
+  },
+  {
+    "TEAMS": "Indiana",
+    "APP": 2
+  },
+  {
+    "TEAMS": "Kansas",
+    "APP": 5
+  },
+  {
+    "TEAMS": "Kentucky",
+    "APP": 5
+  },
+  {
+    "TEAMS": "Louisville",
+    "APP": 2
+  },
+  {
+    "TEAMS": "Maryland",
+    "APP": 1
+  },
+  {
+    "TEAMS": "Memphis",
+    "APP": 1
+  },
+  {
+    "TEAMS": "Michigan",
+    "APP": 4
+  },
+  {
+    "TEAMS": "Michigan State",
+    "APP": 2
+  },
+  {
+    "TEAMS": "North Carolina",
+    "APP": 5
+  },
+  {
+    "TEAMS": "Ohio State",
+    "APP": 1
+  },
+  {
+    "TEAMS": "Oklahoma",
+    "APP": 1
+  },
+  {
+    "TEAMS": "Seton Hall",
+    "APP": 1
+  },
+  {
+    "TEAMS": "Syracuse",
+    "APP": 3
+  },
+  {
+    "TEAMS": "UCLA",
+    "APP": 2
+  },
+  {
+    "TEAMS": "UNLV",
+    "APP": 1
+  },
+  {
+    "TEAMS": "Utah",
+    "APP": 1
+  },
+  {
+    "TEAMS": "Villanova",
+    "APP": 2
+  },
+  {
+    "TEAMS": "Wisconsin",
+    "APP": 1
+  }
+]

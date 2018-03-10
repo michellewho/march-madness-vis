@@ -8,8 +8,6 @@ var padding = 10;
 var y = 50;
 var x = 50;
 
-240 + 240 + 10 + 10
-
 class CustomD3Component extends D3Component {
 
   initialize(node, props) {
