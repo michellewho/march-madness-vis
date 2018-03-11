@@ -18,6 +18,9 @@ var x = d3.scaleBand()
 
 class TeamHistory extends D3Component {
   initialize(node, props) {
+    var sweet16 = props.sweet.sort(function (x, y) {
+      return d3.ascending(x.APP, y.APP);
+    })
     const container = d3.select(node).append('svg');
     container.attr('viewBox', `-40 0 ${size * 2} ${size * 5}`)
       .style('width', '180%')
@@ -25,8 +28,8 @@ class TeamHistory extends D3Component {
 
     d3.select(node).attr("class", "visContainer")
 
-    x.domain([0, d3.max(props.final, function (d) { return d.APP; })])
-    y.domain(props.final.map(function (d) { return d.TEAMS; }));
+    x.domain([0, d3.max(sweet16, function (d) { return d.APP; })])
+    y.domain(sweet16.map(function (d) { return d.TEAMS; }));
 
 
     container.append("g")
@@ -40,10 +43,10 @@ class TeamHistory extends D3Component {
       .style("opacity", 0);
 
     var bars = container.selectAll("rect")
-      .data(props.final)
+      .data(sweet16)
       .enter()
       .append("rect")
-      .attr("height", height)
+      .attr("height", 10)
       .attr('transform', 'translate(' + [150] + ')')
       .attr("y", function (d) { return y(d.TEAMS) })
       .attr("class", "rect")
@@ -53,13 +56,20 @@ class TeamHistory extends D3Component {
       //     .style("left", (d3.event.pageX + 25) + "px")
       //     .style("top", (d3.event.pageY - 28) + "px");
       // })
+      .on("mouseover", function(d) {		
+        div.transition()		
+            .duration(200)		
+            .style("opacity", .9);		
+        div.html(d.APPS)	
+            .style("left", (d3.event.pageX) + "px")		
+            .style("top", (d3.event.pageY - 28) + "px");	
+        })	
       .on("mouseover", function (d) {
         d3.select(this).style("fill", "brown");
       })
       .on("mouseout", function (d) {
         d3.select(this).style("fill", "steelblue");
       })
-      .attr("width", 0)
       .transition().duration(800)
       .attr("width", function (d) {
         return d.APP * 30 + "px"
@@ -117,7 +127,7 @@ class TeamHistory extends D3Component {
 
     if (props.state === 'sweet') {
       var sweet16 = props.sweet.sort(function (x, y) {
-        return [d3.ascending(x.App, y.App)];
+        return [d3.ascending(x.APP, y.APP)];
       })
       var bars = d3.selectAll("svg")
         .remove()
@@ -126,7 +136,7 @@ class TeamHistory extends D3Component {
 
     } else if (props.state === 'elite') {
       var elite8 = props.elite.sort(function (x, y) {
-        return d3.ascending(x.App, y.App);
+        return d3.ascending(x.APP, y.APP);
       })
       var bars = d3.selectAll("svg")
         .remove()
@@ -136,7 +146,7 @@ class TeamHistory extends D3Component {
 
     } else if (props.state === 'final') {
       var final4 = props.final.sort(function (x, y) {
-        return d3.ascending(x.App, y.App);
+        return d3.ascending(x.APP, y.APP);
       })
       var bars = d3.selectAll("svg")
         .remove()
@@ -146,7 +156,7 @@ class TeamHistory extends D3Component {
 
     } else if (props.state === 'natApps') {
       var natapp = props.natApps.sort(function (x, y) {
-        return d3.ascending(x.App, y.App);
+        return d3.ascending(x.APP, y.APP);
       })
       var bars = d3.selectAll("svg")
         .remove()
@@ -156,7 +166,7 @@ class TeamHistory extends D3Component {
 
     } else if (props.state === 'natWins') {
       var natwin = props.natWins.sort(function (x, y) {
-        return d3.ascending(x.App, y.App);
+        return d3.ascending(x.APP, y.APP);
       })
 
       var bars = d3.selectAll("svg")

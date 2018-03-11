@@ -148,7 +148,7 @@ Select Team Seed:
 [aside]
 [TeamHistory state:radioVal final:final elite:elite sweet:sweet natWins:natWins natApps:natApps /]
 [/aside]
-## Jon's Section to Fill In
+## How do past performances affect the odds?
 As we begin to further understand how data can help narrow the odds of getting a perfect bracket, understanding how teams have performed in the past is a big indicator of how they might 
 perform in the future.
 
@@ -164,7 +164,7 @@ The Sweet 16 is comprised of the 16 teams remaining in the tournament, 4 from ea
 [data name:"natApps" source:"natApp.json" /]
 
 
-[var name:"radioVal" value: "final" /]
-[Radio value:radioVal options:`[{ value:"final", label: "Final 4     " }, { value:"elite", label: "Elite 8     " }, { value: "sweet", label: "Sweet 16     " }, { value: "natWins", label: "National Wins     " }, { value: "natApps", label: "National Appearances" }]`  /]
+[var name:"radioVal" value: "sweet" /]
+[Radio value:radioVal options:`[{ value: "sweet", label: "Sweet 16     " }, { value:"elite", label: "Elite 8     " }, { value:"final", label: "Final 4     " }, { value: "natApps", label: "National Appearances" }, { value: "natWins", label: "National Wins     " }]`  /]
 
 [/waypoint]
