@@ -71,8 +71,6 @@ If we have 4 teams, with 3 games being played, assuming teams are equal in skill
 
 [waypoint]
 [aside]
-// [data name:"bracket" source:"bracket.json" /]
-// [TeamHistory data:bracket /]
 [/aside]
 
 ## Where do these numbers come from?
