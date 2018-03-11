@@ -22,8 +22,6 @@ has never been done. There has never been a perfect bracket.
 [aside]
 [data name:"brackets" source:"brackets.json" /]
 [Brackets data:brackets/]
-// [Inline][img src:"images/bracket.jpg" /][/Inline]
-// [SVG src:"bracketstructure2.svg" /]
 [/aside]
 
 ## General Terminology
